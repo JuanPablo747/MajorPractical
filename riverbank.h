@@ -9,8 +9,7 @@
 // Class definition
 class Riverbank
 {
-  //Variables
-  //e.g. std::string name;
+  animal* bankName;
 
  public:
   //Constructors
