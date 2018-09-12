@@ -7,7 +7,7 @@ using namespace std;
 //constructors
 Riverbank::Riverbank()
 {
-	//variables
+    bankName = new animal[3];
 }
 
 Riverbank::Riverbank(std::string name)
