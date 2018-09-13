@@ -19,7 +19,7 @@ class animal
 		//*getters*
 		char getInitial();			// could use for searching what is stored at a pointer
 		std::string getSpecies();	// mainly used for displaying to player
-		virtual std::string makeSound();
+		//virtual std::string makeSound();
 			// -> don't want "pure virtual, ie "virtual std::string makeSound() = 0" because we can have a "generic animal", its the unclassified one. We aren't buidling a subclass for it.
 			// -> choose string so we can choose to print it or not later. This could be changed later.
 

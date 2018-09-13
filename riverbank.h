@@ -3,27 +3,38 @@
 #define RIVERBANK_H
 
 #include <string>
+#include "animal.h"
 
 // no namespaces in include file!!!
 
 // Class definition
-class Riverbank
+class riverbank
 {
-  animal* bankName;
+ 	animal* bankName;
+ 	int count;
 
- public:
-  //Constructors
-  Riverbank();
-  Riverbank(std::string name);
+ 	public:
+ 	//Constructors
+ 	riverbank();
 
-  //getters
-  // std::string getName();
+ 	//returns the array of the animals
+	animal* returnArray();
 
-  //setters
-  // void changeAge(int aAge);
+	//adds an animal to the animal array
+	void addAnimal(animal a);
 
-  //Destructor
-  ~Riverbank();
+	//subtracts an animal to the animal array
+	void removeAnimal(animal a);
+
+	//Prints the status of the bank or what is in the array
+	void printBankStatus();
+
+	//checks whether the array has all the animals in it (will use with the while loop)
+	bool checkBank();
+
+
+ 	//Destructor
+ 	~riverbank();
 };
 
 #endif

@@ -8,6 +8,7 @@ using namespace std;
 //*Constructors*
 animal::animal()
 {
+	initial = 'x';
 	// default constructor to be left empty. Only used for making sublcasses
 }
 animal::animal(char aInitial, string aSpecies)
@@ -26,9 +27,9 @@ string animal::getSpecies()
 {
 	return species;
 }
-string animal::makeSound(){
+//string animal::makeSound(){
 	// even if virtual, still needs to be defined. But can leave empty
-}
+//}
 
 //*setters*
 void animal::setInitial(char aInitial)
