@@ -27,9 +27,10 @@ string animal::getSpecies()
 {
 	return species;
 }
-//string animal::makeSound(){
+string animal::makeSound(int repeats){
+	return "generic animal sound";
 	// even if virtual, still needs to be defined. But can leave empty
-//}
+}
 
 //*setters*
 void animal::setInitial(char aInitial)

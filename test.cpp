@@ -2,6 +2,7 @@
 
 #include "animal.h"
 #include "riverbank.h"
+#include "cat.h"
 
 using namespace std;
 
@@ -25,12 +26,12 @@ int main(void)
 
 	//initialise a dog, cat and mouse
 	animal dog('d', "dog");
-	animal cat('c', "cat");
+	cat Cat;
 	animal mouse('m', "mouse");
 
 	//add those animals to the riverbank
 	A.addAnimal(dog);
-	A.addAnimal(cat);
+	A.addAnimal(Cat);
 	A.addAnimal(mouse);
 
 	//print that riverbank with the animals
