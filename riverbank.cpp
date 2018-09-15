@@ -8,58 +8,49 @@ using namespace std;
 //constructors
 riverbank::riverbank()
 {
-    bankName = new animal[3];
-    count = 0;
+   
 }
 
-//returns the array of the animals
-animal* riverbank::returnArray()
+//returns the array of the animal pointers
+std::vector<animal*> riverbank::returnArray()
 {
 	return bankName;
 }
 
 //adds an animal to the animal array
-void riverbank::addAnimal(animal a)
+void riverbank::addAnimal(animal* a)
 {
 	//add the animal to the array
-	bankName[count] = a; 
-	//total animals count ++ if it isnt the blank animal
-	if(a.getInitial() != 'x')
-	{
-	count++;
-	}
+	bankName.push_back(a); 
 }
 
 //subtracts an animal to the animal array
-void riverbank::removeAnimal(animal a)
+void riverbank::removeAnimal(animal* a)
 {
-	//creates a blank animal with initial 'X'
-	animal blank;
-
+	int counter = 0;
 	//iterates over the animal array and sees if that animal exists in the bankName array
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < bankName.size(); i++)
 	{
 		//if it does exist, make it a 'blank' animal i.e. not a cat, dog or mouse
 		//basically clears the memory slot
-		if (a.getInitial() == bankName[i].getInitial())
+		if (a->getInitial() == bankName[i]->getInitial())
 		{
-			bankName[i] = blank;
+			bankName.erase(bankName.begin() + counter);
 		}
+		counter++;
 	}
-	//take away one from the total animals in the array
-	count--;
 }
 
 //Prints the status of the bank or what is in the array
 void riverbank::printBankStatus()
 {
 	cout << "Animals on riverbank: ";
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < bankName.size(); i++)
 	{
 		//if the animal isnt a 'blank' animal, it will print it's species to the screen
-		if (bankName[i].getInitial() != 'x')
+		if (bankName[i]->getInitial() != 'x')
 		{
-			cout << bankName[i].getSpecies() << " ";
+			cout << bankName[i]->getSpecies() << " ";
 		}
 	}
 	cout << endl;
@@ -71,13 +62,13 @@ void riverbank::printBankStatus()
 bool riverbank::checkBank()
 {
   int counter = 0;
-  if (count != 3)
+  if (bankName.size() != 3)
   {
     return false;
   }
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < bankName.size(); i++)
   {
-  	if (bankName[i].getInitial() == 'd' || bankName[i].getInitial() == 'c' || bankName[i].getInitial() == 'm') 
+  	if (bankName[i]->getInitial() == 'd' || bankName[i]->getInitial() == 'c' || bankName[i]->getInitial() == 'm') 
   	{
   		counter++;
   	}
@@ -91,5 +82,5 @@ bool riverbank::checkBank()
 
 riverbank::~riverbank()
 {
-	delete [] bankName;
+	
 }

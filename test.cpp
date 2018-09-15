@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "animal.h"
 #include "riverbank.h"
@@ -8,26 +9,13 @@ using namespace std;
 
 int main(void)
 {
-	//intilise 3 'blank' animals
-	animal blank1;
-	animal blank2;
-	animal blank3;
-
 	//initialise a blank riverbank
 	riverbank A;
 
-	//add the blank animals to the array (we need them so the printer knows what to print)
-	A.addAnimal(blank1);
-	A.addAnimal(blank2);
-	A.addAnimal(blank3);
-
-	//print empty array
-	A.printBankStatus();
-
 	//initialise a dog, cat and mouse
-	animal dog('d', "dog");
-	cat Cat;
-	animal mouse('m', "mouse");
+	animal* dog = new animal('d', "dog");
+	cat* Cat = new cat;
+	animal* mouse = new animal('m', "mouse");
 
 	//add those animals to the riverbank
 	A.addAnimal(dog);
@@ -44,6 +32,7 @@ int main(void)
 		cout << "false" << endl;
 	//remove an animal
 	A.removeAnimal(dog);
+	cout << Cat->makeSound(2) << endl;
 
 	//print the riverbank with the dog removed
 	A.printBankStatus();
@@ -55,6 +44,13 @@ int main(void)
 		cout << "false" << endl;
 
 
+	vector<animal*> print = A.returnArray();
+
+	cout << "Making sounds" << endl;
+	for (int i = 0; i < 2; i++)
+	{
+		cout << print[i]->makeSound(1) << endl;
+	}
 
 	return 0;
 }

@@ -3,6 +3,7 @@
 #define RIVERBANK_H
 
 #include <string>
+#include <vector>
 #include "animal.h"
 
 // no namespaces in include file!!!
@@ -10,21 +11,20 @@
 // Class definition
 class riverbank
 {
- 	animal* bankName;
- 	int count;
+ 	std::vector<animal*> bankName;
 
  	public:
  	//Constructors
  	riverbank();
 
  	//returns the array of the animals
-	animal* returnArray();
+	std::vector<animal*> returnArray();
 
 	//adds an animal to the animal array
-	void addAnimal(animal a);
+	void addAnimal(animal* a);
 
 	//subtracts an animal to the animal array
-	void removeAnimal(animal a);
+	void removeAnimal(animal* a);
 
 	//Prints the status of the bank or what is in the array
 	void printBankStatus();
