@@ -74,7 +74,7 @@ int riverbank::getStoredAnimals()
 // ------ // ------ // setters // ------ // ------ //
 
 //adds an animal to the animal array
-void riverbank::addAnimal(char aInitial)
+void riverbank::addAnimal(animal* a)
 {
 	// move along array and find an element containing a 'blank animal', then replace it with the new animal
 	for (int i = 0; i < getMaxCapacity(); i++)
@@ -91,26 +91,12 @@ void riverbank::addAnimal(char aInitial)
 void riverbank::removeAnimal(animal* a)
 {
 	// move along array and find an element containing 'animal a', then replace it with the 'blank animal'
-	for (int i = 0; i < bankStorage.getMaxCapacity(); i++)
+	for (int i = 0; i < getMaxCapacity(); i++)
 	{
 		if (bankStorage[i]->getInitial() == a) 
 		{
-			bankStorage[i] = a;
+			bankStorage[i] = blank;	//potential error line
 			stored_animals = stored_animals - 1;
 		}
-	}
-
-
-	int counter = 0;
-	//iterates over the animal array and sees if that animal exists in the bankStorage array
-	for (int i = 0; i < bankStorage.size(); i++)
-	{
-		//if it does exist, make it a 'blank' animal i.e. not a cat, dog or mouse
-		//basically clears the memory slot
-		if (a->getInitial() == bankStorage[i]->getInitial())
-		{
-			bankStorage.erase(bankStorage.begin() + counter);
-		}
-		counter++;
 	}
 }
