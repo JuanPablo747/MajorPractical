@@ -1,7 +1,7 @@
 // ------ // ------ // set-up // ------ // ------ //
 #include <string>
 #include <iostream>
-#include "riverbank.h"
+#include "riverbank-array.h"
 #include "animal.h"
 
 using namespace std;
@@ -12,7 +12,7 @@ riverbank::riverbank()
 {
 	capacity = 3;
 	stored_animals = 0;
-	(animal*)* bankStorage = new animal*[capacity];
+	animal** bankStorage = new animal*[capacity];
 }
 
 riverbank::~riverbank()
@@ -23,7 +23,7 @@ riverbank::~riverbank()
 // ------ // ------ // getters // ------ // ------ //
 
 //returns the array of the animal pointers
-(animal*)* riverbank::returnArray()
+animal** riverbank::returnArray()
 {
 	return bankStorage;
 }
@@ -62,7 +62,7 @@ bool riverbank::checkBank()
 // get capacity
 int riverbank::getMaxCapacity()
 {
-	return capacity
+	return capacity;
 }
 
 // get current stored_animals
@@ -95,7 +95,7 @@ void riverbank::removeAnimal(animal* a)
 	{
 		if (bankStorage[i]->getInitial() == a) 
 		{
-			bankStorage[i] = blank;	//potential error line
+			bankStorage[i] = NULL;
 			stored_animals = stored_animals - 1;
 		}
 	}
