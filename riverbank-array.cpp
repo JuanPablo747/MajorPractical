@@ -74,26 +74,26 @@ int riverbank::getStoredAnimals()
 // ------ // ------ // setters // ------ // ------ //
 
 //adds an animal to the animal array
-void riverbank::addAnimal(animal* a)
+void riverbank::addAnimal(animal* aAnimal)
 {
 	// move along array and find an element containing a 'blank animal', then replace it with the new animal
 	for (int i = 0; i < getMaxCapacity(); i++)
 	{
 		if (bankStorage[i]->getInitial() == 'x') 
 		{
-			bankStorage[i] = a;
+			bankStorage[i] = aAnimal;
 			stored_animals = stored_animals + 1;
 		}
 	}
 }
 
 //subtracts an animal to the animal array
-void riverbank::removeAnimal(animal* a)
+void riverbank::removeAnimal(animal* aAnimal)
 {
-	// move along array and find an element containing 'animal a', then replace it with the 'blank animal'
+	// move along array and find an element containing 'aAnimal', then replace it with the 'blank animal'
 	for (int i = 0; i < getMaxCapacity(); i++)
 	{
-		if (bankStorage[i]->getInitial() == a) 
+		if (bankStorage[i]->getInitial() == aAnimal) 
 		{
 			bankStorage[i] = NULL;
 			stored_animals = stored_animals - 1;
