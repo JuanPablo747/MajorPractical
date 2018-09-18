@@ -1,19 +1,25 @@
-//*include files*
+// ------ // ------ // set-up // ------ // ------ //
 #include <string>
 #include "cat.h"
 
-//*using namespace*
 using namespace std;
-					
-//*Constructors*
+
+// ------ // constructors & destructors // ------ //
+
 cat::cat() : animal()
 {
-	initial = 99;	// in ASCII 99 = c
+	initial = 'c';
 	species = "Cat";
 	eats = "mouse";
 }
-		
-//*getters*
+
+cat::~cat()
+{
+	// leave blank for now
+}
+
+// ------ // ------ // getters // ------ // ------ //
+
 string cat::makeSound(int repeats){
 	string cry = "";
 	for(int i = 0; i < repeats; i++)
@@ -28,11 +34,4 @@ string cat::makeSound(int repeats){
 	return cry;
 }
 
-//*setters*
-
-
-//*destructors*
-cat::~cat()
-{
-	// leave blank for now
-}
+// ------ // ------ // setters // ------ // ------ //
