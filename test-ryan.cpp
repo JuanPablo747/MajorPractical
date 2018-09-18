@@ -21,11 +21,24 @@ int main(void)
 	A.addAnimal(Cat);
 	A.addAnimal(mouse);
 
+	cout << Cat->makeSound(1) << endl;
+
 	A.printBankStatus();
+
+	if (A.checkBank() == true)
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
 
 	A.removeAnimal(Cat);
 
 	A.printBankStatus();
+
+	if (A.checkBank() == true)
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+
 
 
 	return 0;

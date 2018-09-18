@@ -1,3 +1,4 @@
+// ------ // ------ // set-up // ------ // ------ //
 #include <string>
 #include <iostream>
 #include "riverbank-array-two.h"
@@ -5,18 +6,67 @@
 
 using namespace std;
 
-//constructors
+// ------ // constructors & destructors // ------ //
+
 riverbank::riverbank()
 {
     bankName = new animal*[3];
     count = 0;
 }
 
+riverbank::~riverbank()
+{
+	delete [] bankName;
+}
+
+// ------ // ------ // getters // ------ // ------ //
+
 //returns the array of the animals
 animal** riverbank::returnArray()
 {
 	return bankName;
 }
+
+//checks whether the array has all the animals in it (will use with the while loop)
+//returns true if all animals are in the array, false if not
+// dog = d cat = c mouse = m
+bool riverbank::checkBank()
+{
+  int counter = 0;
+  if (count != 3)
+  {
+    return false;
+  }
+  for (int i = 0; i < 3; i++)
+  {
+  	if (bankName[i]->getInitial() == 'd' || bankName[i]->getInitial() == 'c' || bankName[i]->getInitial() == 'm') 
+  	{
+  		counter++;
+  	}
+  }
+  if (counter == 3)
+  {
+  	return true;
+  }
+  return false;
+}
+
+//Prints the status of the bank or what is in the array
+void riverbank::printBankStatus()
+{
+	cout << "Animals on riverbank: ";
+	for (int i = 0; i < 3; i++)
+	{
+		//if the animal isnt a 'blank' animal, it will print it's species to the screen
+		if (bankName[i] != NULL)
+		{
+			cout << bankName[i]->getSpecies() << " ";
+		}
+	}
+	cout << endl;
+}
+
+// ------ // ------ // setters // ------ // ------ //
 
 //adds an animal to the animal array
 void riverbank::addAnimal(animal* a)
@@ -53,48 +103,4 @@ void riverbank::removeAnimal(animal* a)
 		}
 	}
 
-}
-
-//Prints the status of the bank or what is in the array
-void riverbank::printBankStatus()
-{
-	cout << "Animals on riverbank: ";
-	for (int i = 0; i < 3; i++)
-	{
-		//if the animal isnt a 'blank' animal, it will print it's species to the screen
-		if (bankName[i] != NULL)
-		{
-			cout << bankName[i]->getSpecies() << " ";
-		}
-	}
-	cout << endl;
-}
-
-//checks whether the array has all the animals in it (will use with the while loop)
-//returns true if all animals are in the array, false if not
-// dog = d cat = c mouse = m
-bool riverbank::checkBank()
-{
-  int counter = 0;
-  if (count != 3)
-  {
-    return false;
-  }
-  for (int i = 0; i < 3; i++)
-  {
-  	if (bankName[i]->getInitial() == 'd' || bankName[i]->getInitial() == 'c' || bankName[i]->getInitial() == 'm') 
-  	{
-  		counter++;
-  	}
-  }
-  if (counter == 3)
-  {
-  	return true;
-  }
-  return false;
-}
-
-riverbank::~riverbank()
-{
-	delete [] bankName;
 }
