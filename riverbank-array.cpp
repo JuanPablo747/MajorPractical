@@ -13,8 +13,6 @@ riverbank::riverbank()
 	capacity = 3;
 	stored_animals = 0;
 	(animal*)* bankStorage = new animal*[capacity];
-	animal* blank = new animal('x', "blank");
-	bankStorage = {blank, blank, blank};
 }
 
 riverbank::~riverbank()
@@ -34,7 +32,7 @@ riverbank::~riverbank()
 void riverbank::printBankStatus()
 {
 	cout << "Animals on riverbank: ";
-	for (int i = 0; i < bankStorage.getMaxCapacity(); i++)
+	for (int i = 0; i < getMaxCapacity(); i++)
 	{
 		//if the animal isnt a 'blank' animal, it will print it's species to the screen
 		if (bankStorage[i]->getInitial() != 'x')
@@ -50,7 +48,7 @@ void riverbank::printBankStatus()
 	// -> dog = d cat = c mouse = m
 bool riverbank::checkBank()
 {
-	if (stored_animals == 3)
+	if (getStoredAnimals() == getMaxCapacity())
 	{
 		return true;
 	}
@@ -62,13 +60,13 @@ bool riverbank::checkBank()
 }
 
 // get capacity
-int getMaxCapacity()
+int riverbank::getMaxCapacity()
 {
 	return capacity
 }
 
 // get current stored_animals
-int getStoredAnimals()
+int riverbank::getStoredAnimals()
 {
 	return stored_animals;
 }
@@ -79,7 +77,7 @@ int getStoredAnimals()
 void riverbank::addAnimal(char aInitial)
 {
 	// move along array and find an element containing a 'blank animal', then replace it with the new animal
-	for (int i = 0; i < bankStorage.getMaxCapacity(); i++)
+	for (int i = 0; i < getMaxCapacity(); i++)
 	{
 		if (bankStorage[i]->getInitial() == 'x') 
 		{
