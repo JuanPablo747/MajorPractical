@@ -14,7 +14,7 @@ class riverbank
 	//*States*
 	int capacity;
 	int stored_animals;
-	(animal*)* bankStorage;
+	animal** bankStorage;
 
 	//*Behaviours*
 	public:
@@ -28,7 +28,7 @@ class riverbank
 	void removeAnimal(animal* a);
 
 	// getter: returns the array of the animals
-	animal* returnArray();
+	animal** returnArray();
 
 	// getter: Prints the status of the bank or what is in the array
 	void printBankStatus();
