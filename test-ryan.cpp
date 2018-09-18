@@ -10,6 +10,7 @@ int main(void)
 	riverbank A;
 	riverbank B;
 
+	A.initialiseNULL();
 	B.initialiseNULL();
 
 	animal* dog = new animal('d', "dog");
@@ -19,6 +20,12 @@ int main(void)
 	A.addAnimal(dog);
 	A.addAnimal(Cat);
 	A.addAnimal(mouse);
+
+	A.printBankStatus();
+
+	A.removeAnimal(Cat);
+
+	A.printBankStatus();
 
 
 	return 0;

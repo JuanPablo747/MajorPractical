@@ -27,6 +27,7 @@ void riverbank::addAnimal(animal* a)
 		{
 			bankName[i] = a; 
 			count++;
+			break;
 		}
 	}
 }
