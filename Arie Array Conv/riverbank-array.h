@@ -14,6 +14,7 @@ class riverbank
 	//*States*
 	int capacity;
 	int stored_animals;
+	public:	// ONLY PUBLIC TEMPERARILY
 	animal** bankStorage;
 
 	//*Behaviours*
