@@ -1,3 +1,4 @@
+// ------ // ------ // set-up // ------ // ------ //
 #include <string>
 #include <iostream>
 #include "riverbank-array-two.h"
@@ -5,68 +6,25 @@
 
 using namespace std;
 
-//constructors
+// ------ // constructors & destructors // ------ //
+
 riverbank::riverbank()
 {
     bankName = new animal*[3];
     count = 0;
 }
 
+riverbank::~riverbank()
+{
+	delete [] bankName;
+}
+
+// ------ // ------ // getters // ------ // ------ //
+
 //returns the array of the animals
 animal** riverbank::returnArray()
 {
 	return bankName;
-}
-
-//adds an animal to the animal array
-void riverbank::addAnimal(animal* a)
-{
-	for (int i = 0; i < 3; i++)
-	{
-		if (bankName[i] == NULL)
-		{
-			bankName[i] = a; 
-			count++;
-		}
-	}
-}
-
-void riverbank::initialiseNULL()
-{
-	for(int i = 0; i < 3; i++)
-	{
-		bankName[i] = NULL;
-	}
-}
-
-//subtracts an animal to the animal array
-void riverbank::removeAnimal(animal* a)
-{
-	for (int i = 0; i < 3; i++)
-	{
-		if (a->getInitial() == bankName[i]->getInitial())
-		{
-			bankName[i] = NULL;
-			count--;
-			break;
-		}
-	}
-
-}
-
-//Prints the status of the bank or what is in the array
-void riverbank::printBankStatus()
-{
-	cout << "Animals on riverbank: ";
-	for (int i = 0; i < 3; i++)
-	{
-		//if the animal isnt a 'blank' animal, it will print it's species to the screen
-		if (bankName[i] != NULL)
-		{
-			cout << bankName[i]->getSpecies() << " ";
-		}
-	}
-	cout << endl;
 }
 
 //checks whether the array has all the animals in it (will use with the while loop)
@@ -93,7 +51,56 @@ bool riverbank::checkBank()
   return false;
 }
 
-riverbank::~riverbank()
+//Prints the status of the bank or what is in the array
+void riverbank::printBankStatus()
 {
-	delete [] bankName;
+	cout << "Animals on riverbank: ";
+	for (int i = 0; i < 3; i++)
+	{
+		//if the animal isnt a 'blank' animal, it will print it's species to the screen
+		if (bankName[i] != NULL)
+		{
+			cout << bankName[i]->getSpecies() << " ";
+		}
+	}
+	cout << endl;
+}
+
+// ------ // ------ // setters // ------ // ------ //
+
+//adds an animal to the animal array
+void riverbank::addAnimal(animal* a)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		if (bankName[i] == NULL)
+		{
+			bankName[i] = a; 
+			count++;
+			break;
+		}
+	}
+}
+
+void riverbank::initialiseNULL()
+{
+	for(int i = 0; i < 3; i++)
+	{
+		bankName[i] = NULL;
+	}
+}
+
+//subtracts an animal to the animal array
+void riverbank::removeAnimal(animal* a)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		if (a->getInitial() == bankName[i]->getInitial())
+		{
+			bankName[i] = NULL;
+			count--;
+			break;
+		}
+	}
+
 }
