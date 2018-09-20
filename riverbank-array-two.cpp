@@ -54,7 +54,6 @@ bool riverbank::checkBank()
 //Prints the status of the bank or what is in the array
 void riverbank::printBankStatus()
 {
-	cout << "Animals on riverbank: ";
 	for (int i = 0; i < 3; i++)
 	{
 		//if the animal isnt a 'blank' animal, it will print it's species to the screen
@@ -64,6 +63,60 @@ void riverbank::printBankStatus()
 		}
 	}
 	cout << endl;
+}
+
+int riverbank::checkAnimals()
+{
+  //return false if there are no animals, 1 animal or 3 animals
+  int counter = 0;
+  for (int i = 0; i < 3; i++)
+    if (bankName[i] == NULL)
+      counter++;
+
+  if (counter == 3 || counter == 2 || counter == 0)
+      return 0;
+
+  //getting the two animals that are in the array
+  char a;
+  char b;
+  int counter2 = 0;
+  for (int j = 0; j < 3; j++)
+  {
+    if (bankName[j] != NULL)
+    {
+      if (counter2 == 0)
+      {
+        a = bankName[j]->getInitial();
+        counter2++;
+      }
+      if (counter2 == 1)
+      {
+        b = bankName[j]->getInitial();
+      }
+    }
+  }
+
+  if ((a == 'd' && b == 'c') || (a == 'c' && b == 'd'))
+    return 1;
+  if ((a == 'c' && b == 'm') || (a == 'm' && b == 'c'))
+    return 2;
+
+  return 0;
+}
+
+bool riverbank::checkIfExists(animal* a)
+{
+  for (int i = 0; i < 3; i++)
+  {
+    if (bankName[i] != NULL)
+    {
+      if(bankName[i]->getInitial() == a->getInitial())
+      {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 // ------ // ------ // setters // ------ // ------ //
@@ -95,12 +148,15 @@ void riverbank::removeAnimal(animal* a)
 {
 	for (int i = 0; i < 3; i++)
 	{
-		if (a->getInitial() == bankName[i]->getInitial())
-		{
-			bankName[i] = NULL;
-			count--;
-			break;
-		}
+        if (bankName[i] != NULL)
+        {
+            if (a->getInitial() == bankName[i]->getInitial())
+            {
+                bankName[i] = NULL;
+                count--;
+                break;
+            }
+        }
 	}
 
 }
