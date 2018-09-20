@@ -35,6 +35,12 @@ class riverbank
 	//checks whether the array has all the animals in it (will use with the while loop)
 	bool checkBank();
 
+	//checks to see whether there is an animal that will eat the other animal on a riverbank
+	int checkAnimals();
+
+	//checks to see if an 
+	bool checkIfExists(animal* a);
+
 
  	//Destructor
  	~riverbank();
