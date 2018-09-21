@@ -5,8 +5,8 @@ using namespace std;
 int returnID(string word)
 {
     int len = word.length();
-    int noOfAnimals = 3;
-    string animals[3] = {"dog", "cat", "mouse"};
+    int noOfAnimals = 4;
+    string animals[4] = {"dog", "cat", "mouse", "pass"};
     int counter;
     int counterTwo = 1;
     for (int k = 0; k < noOfAnimals; k++)
