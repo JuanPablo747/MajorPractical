@@ -5,7 +5,7 @@ using namespace std;
 
 mouse::mouse() : animal(){
 	initial = 'm';
-	species = "mouse";
+	species = "Mouse";
 }
 
 string mouse::makeSound(int repeats){
