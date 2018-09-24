@@ -74,6 +74,10 @@ int main(void)
 	for(int i = 0; i < 3; i++)
 		if (a[i]==NULL)
 			cout << "NULL" << " ";
+
+	cout << endl << "Testing checkAnimals() function" << endl;
+		cout << "if it prints 0, the function works" << endl;
+		cout << "Prints: " << A.checkAnimals();
 	cout << endl << endl;
 
 	//testing adding animals to the array and the print function
@@ -84,6 +88,10 @@ int main(void)
 	cout << "If this works, will print Cat Dog Mouse" << endl;
 	cout << "Prints: ";
 	A.printBankStatus();
+	
+	cout << endl << "Testing checkAnimals() function" << endl;
+		cout << "if it prints 3, the function works" << endl;
+		cout << "Prints: " << A.checkAnimals();
 	cout << endl;
 
 
@@ -100,6 +108,9 @@ int main(void)
 	cout << "Prints: ";
 	A.printBankStatus();
 
+	cout << endl << "Testing checkAnimals() function" << endl;
+		cout << "if it prints 2, the function works" << endl;
+		cout << "Prints: " << A.checkAnimals();
 
 	cout << endl << "Testing checkBank() function on partly full array" << endl;
 	cout << "if it prints false, the function works" << endl;
