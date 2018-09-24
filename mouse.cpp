@@ -1,12 +1,19 @@
+// ------ // ------ // set-up // ------ // ------ //
 #include "mouse.h"
 #include <string>
 
 using namespace std;
 
+// ------ // constructors & destructors // ------ //
+
 mouse::mouse() : animal(){
 	initial = 'm';
 	species = "Mouse";
 }
+
+mouse::~mouse(){};
+
+// ------ // ------ // getters // ------ // ------ //
 
 string mouse::makeSound(int repeats){
 	string squeak = "";
@@ -21,5 +28,4 @@ string mouse::makeSound(int repeats){
 	}
 	return squeak;
 }
-
-mouse::~mouse(){};
+// ------ // ------ // setters // ------ // ------ //
