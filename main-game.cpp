@@ -12,6 +12,7 @@
 using namespace std;
 
 extern int returnID(string word);
+void pause(int dur);
 
 int main(void)
 {
@@ -39,11 +40,15 @@ int main(void)
 	
 
 //********** PLAY THE GAME **********//
+	system("clear");
 	cout << "Game starting..." << endl << endl;
-
+	pause(2);
 	// each run of this loop is a "turn"
-	while(gameOver == false)
+	while(rightBank.checkBank() == false)
 	{
+		//clears the screen 
+		system("clear");
+
 		// at the beginning of each "turn", reset the playerInput (prevent looping an animal)
 		playerInput = "null";
 
@@ -108,18 +113,74 @@ int main(void)
 			// while an invalid input
 			while(returnID(playerInput) == 99)
 			{	
+				//geting input from the user
 				cin >> playerInput;
-				//if still invalid after input, display message.
-				if(returnID(playerInput) == 99)
+
+				//if the player has given a valid input, proceed
+				if(returnID(playerInput) != 99)
+				{
+					//We are using a for loop so need to store what animal we are adding that corresponds to the input
+					animal* adding;
+					if(returnID(playerInput) == 1)
+						adding = puppy;
+					else if(returnID(playerInput) == 2)
+						adding = kitten;
+					else if (returnID(playerInput) == 3)
+						adding = stuart;
+
+					//iterate through all possible valid player inputs i.e. 1, 2, 3, 4
+					for(int i = 1; i <= 4; i++)
+					{
+						//if the player input = i
+						if(returnID(playerInput) == i)
+						{
+							//and the boat position is on the left
+							if(boatPosition == 0)
+							{
+								//and i isnt the value for 'pass'
+								if (i != 4)
+								{
+									//move those animals
+									leftBank.removeAnimal(adding);
+									rightBank.addAnimal(adding);
+									//delete adding;
+								}
+								//always change the position of the boat regardless if it is an animal or 'pass'
+								boatPosition = 1;
+								//break out of the for loop when an animal has been added/removed
+								break;
+							}
+							//or the boat position is on the right
+							else if (boatPosition == 1)
+							{
+								//and i isnt the value for 'pass'
+								if (i != 4)
+								{
+									//move the animals
+									leftBank.addAnimal(adding);
+									rightBank.removeAnimal(adding);
+									//delete adding;
+								}
+								//always change the position of the boat regardless if it is an animal or 'pass'
+								boatPosition = 0;
+								//break out of the for loop when an animal has been added/removed
+								break;
+							}
+						}
+					}
+				}
+				//else if still invalid after input, display message.
+				else
 				{
 					cout << playerInput << " is an invalid input. Try again." << endl;
 				}
 			}
+		
 
 		// check if a game winning or losing combination (ie gameover) OR if game will go for another turn/loop
 
 			// TEST ONLY - force gameOver after 1 move
-				gameOver = true;
+				//gameOver = true;
 	}
 
 	cout << endl << "Game closing..." << endl;
@@ -128,8 +189,15 @@ int main(void)
 
 //********** TERMINATION **********//
 	//deleting memory allocated
-		delete kitten;
-		delete puppy;
-		delete stuart;
+	delete kitten;
+	delete puppy;
+	delete stuart;
 	return 0;
+}
+
+void pause(int dur)
+{
+    int temp = time(NULL) + dur;
+    
+    while(temp > time(NULL));
 }
