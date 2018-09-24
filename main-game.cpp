@@ -49,12 +49,12 @@ int main(void)
 
 		// print game status
 			// print left bank info
-				cout << "There are " << leftBank.checkAnimals() << " animals on the Left Bank.";
+				cout << "There are " << leftBank.countAnimals() << " animals on the Left Bank. ";
 				// if there is at least 1 animal on the bank...
-				if(leftBank.checkAnimals() != 0)
+				if(leftBank.countAnimals() != 0)
 				{
 					// if there is exactly 1 animal...
-					if(leftBank.checkAnimals() == 1)
+					if(leftBank.countAnimals() == 1)
 					{
 						cout << "It is the ";
 					}
@@ -69,12 +69,12 @@ int main(void)
 				cout << endl;
 
 			// print right bank info
-				cout << "There are " << rightBank.checkAnimals() << " animals on the Right Bank.";
+				cout << "There are " << rightBank.countAnimals() << " animals on the Right Bank. ";
 				// if there is at least 1 animal on the bank...
-				if(rightBank.checkAnimals() != 0)
+				if(rightBank.countAnimals() != 0)
 				{
 					// if there is exactly 1 animal...
-					if(rightBank.checkAnimals() == 1)
+					if(rightBank.countAnimals() == 1)
 					{
 						cout << "It is the ";
 					}
