@@ -5,13 +5,13 @@
 #include <string>
 
 class mouse : public animal{
+	//*States*
 
+	//*Behaviours*
 	public:
 		mouse();
 		std::string makeSound(int repeats);
-
-
-	~mouse();
+		~mouse();
 };
 
 #endif
