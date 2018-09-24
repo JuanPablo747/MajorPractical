@@ -1,13 +1,21 @@
+// ------ // ------ // set-up // ------ // ------ //
 #include <string>
 #include "dog.h"
 
 using namespace std;
+
+// ------ // constructors & destructors // ------ //
 
 dog::dog() : animal(){
 	initial = 'd';
 	species = "Dog";
 	eats = "cat";
 }
+
+dog::~dog(){};
+
+// ------ // ------ // getters // ------ // ------ //
+
 string dog::makeSound(int repeats){
 	string bark = "";
 	for(int i=0;i<repeats;i++){
@@ -20,5 +28,4 @@ string dog::makeSound(int repeats){
 	}
 	return bark;
 }
-
-dog::~dog(){};
+// ------ // ------ // setters // ------ // ------ //
