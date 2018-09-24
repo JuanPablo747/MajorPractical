@@ -119,6 +119,11 @@ bool riverbank::checkIfExists(animal* a)
   return false;
 }
 
+int riverbank::countAnimals()
+{
+  return count;
+}
+
 // ------ // ------ // setters // ------ // ------ //
 
 //adds an animal to the animal array
