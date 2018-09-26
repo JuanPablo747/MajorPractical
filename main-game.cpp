@@ -1,8 +1,9 @@
 // console compile line:
-	// g++ -o testGame main-game.cpp animal.cpp cat.cpp dog.cpp mouse.cpp riverbank-array-two.cpp returnID.cpp
+	// g++ -o testGame main-game.cpp animal.cpp cat.cpp dog.cpp mouse.cpp riverbank-array-two.cpp extraFunctions.cpp
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include "animal.h"
 #include "dog.h"
 #include "cat.h"
@@ -12,7 +13,8 @@
 using namespace std;
 
 extern int returnID(string word);
-void pause(int dur);
+extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern void pause(int dur);
 
 int main(void)
 {
@@ -23,19 +25,22 @@ int main(void)
 		mouse* stuart = new mouse;
 
 	// create banks
-		riverbank leftBank;
-		leftBank.initialiseNULL();
-		leftBank.addAnimal(kitten);
-		leftBank.addAnimal(puppy);
-		leftBank.addAnimal(stuart);
+		riverbank *leftBank = new riverbank;
+		leftBank->initialiseNULL();
+		leftBank->addAnimal(kitten);
+		leftBank->addAnimal(puppy);
+		leftBank->addAnimal(stuart);
 
-		riverbank rightBank;
-		rightBank.initialiseNULL();
+		riverbank *rightBank = new riverbank;
+		rightBank->initialiseNULL();
 
 	// other initializations
-		bool gameOver = false;
+		animal* adding;			// animal we are moving after player enters an input
+		// bool gameOver = false;	// don't need, can remove later
 		string playerInput;
-		int boatPosition = 0;	// 0 = boat on leftBank, 1 = boat on rightBank	//	can only add an animal to opposite bank and remove from current bank
+		// 0 = boat on leftBank, 1 = boat on rightBank	//	can only add an animal to opposite bank and remove from current bank
+		int* boatPosition = new int;	
+		*boatPosition = 0;
 	
 	
 
@@ -44,7 +49,7 @@ int main(void)
 	cout << "Game starting..." << endl << endl;
 	pause(2);
 	// each run of this loop is a "turn"
-	while(rightBank.checkBank() == false)
+	while(rightBank->checkBank() == false)	// check if a gameOver
 	{
 		//clears the screen 
 		system("clear");
@@ -54,12 +59,12 @@ int main(void)
 
 		// print game status
 			// print left bank info
-				cout << "There are " << leftBank.countAnimals() << " animals on the Left Bank. ";
+				cout << "There are " << leftBank->countAnimals() << " animals on the Left Bank. ";
 				// if there is at least 1 animal on the bank...
-				if(leftBank.countAnimals() != 0)
+				if(leftBank->countAnimals() != 0)
 				{
 					// if there is exactly 1 animal...
-					if(leftBank.countAnimals() == 1)
+					if(leftBank->countAnimals() == 1)
 					{
 						cout << "It is the ";
 					}
@@ -69,17 +74,17 @@ int main(void)
 						cout << "They are ";
 					}
 					// regardless, list the animal(s)
-					leftBank.printBankStatus();
+					leftBank->printBankStatus();
 				}
 				cout << endl;
 
 			// print right bank info
-				cout << "There are " << rightBank.countAnimals() << " animals on the Right Bank. ";
+				cout << "There are " << rightBank->countAnimals() << " animals on the Right Bank. ";
 				// if there is at least 1 animal on the bank...
-				if(rightBank.countAnimals() != 0)
+				if(rightBank->countAnimals() != 0)
 				{
 					// if there is exactly 1 animal...
-					if(rightBank.countAnimals() == 1)
+					if(rightBank->countAnimals() == 1)
 					{
 						cout << "It is the ";
 					}
@@ -89,13 +94,13 @@ int main(void)
 						cout << "They are ";
 					}
 					// regardless, list the animal(s)
-					rightBank.printBankStatus();
+					rightBank->printBankStatus();
 				}
 				cout << endl;
 
 			// print/draw boat info
 				cout << "The boat is currently on the ";
-				if(boatPosition == 0)
+				if(*boatPosition == 0)
 				{
 					cout << "Left Bank." << endl;
 				}
@@ -119,55 +124,16 @@ int main(void)
 				//if the player has given a valid input, proceed
 				if(returnID(playerInput) != 99)
 				{
-					//We are using a for loop so need to store what animal we are adding that corresponds to the input
-					animal* adding;
 					if(returnID(playerInput) == 1)
 						adding = puppy;
 					else if(returnID(playerInput) == 2)
 						adding = kitten;
 					else if (returnID(playerInput) == 3)
 						adding = stuart;
+					else if (returnID(playerInput) == 4)
+						adding = stuart;	// placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
 
-					//iterate through all possible valid player inputs i.e. 1, 2, 3, 4
-					for(int i = 1; i <= 4; i++)
-					{
-						//if the player input = i
-						if(returnID(playerInput) == i)
-						{
-							//and the boat position is on the left
-							if(boatPosition == 0)
-							{
-								//and i isnt the value for 'pass'
-								if (i != 4)
-								{
-									//move those animals
-									leftBank.removeAnimal(adding);
-									rightBank.addAnimal(adding);
-									//delete adding;
-								}
-								//always change the position of the boat regardless if it is an animal or 'pass'
-								boatPosition = 1;
-								//break out of the for loop when an animal has been added/removed
-								break;
-							}
-							//or the boat position is on the right
-							else if (boatPosition == 1)
-							{
-								//and i isnt the value for 'pass'
-								if (i != 4)
-								{
-									//move the animals
-									leftBank.addAnimal(adding);
-									rightBank.removeAnimal(adding);
-									//delete adding;
-								}
-								//always change the position of the boat regardless if it is an animal or 'pass'
-								boatPosition = 0;
-								//break out of the for loop when an animal has been added/removed
-								break;
-							}
-						}
-					}
+					moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
 				}
 				//else if still invalid after input, display message.
 				else
@@ -192,12 +158,8 @@ int main(void)
 	delete kitten;
 	delete puppy;
 	delete stuart;
+	delete boatPosition;
+	delete leftBank;
+	delete rightBank;
 	return 0;
-}
-
-void pause(int dur)
-{
-    int temp = time(NULL) + dur;
-    
-    while(temp > time(NULL));
 }
