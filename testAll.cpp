@@ -1,5 +1,5 @@
-//Use this to complile tests
-//g++ -o testAll animal.cpp cat.cpp dog.cpp mouse.cpp returnID.cpp riverbank-array-two.cpp testAll.cpp
+// Use this to complile tests
+// g++ -o testAll testAll.cpp animal.cpp cat.cpp dog.cpp mouse.cpp riverbank-array-two.cpp extraFunctions.cpp
 
 #include <iostream>
 #include <string>
@@ -12,6 +12,8 @@
 using namespace std;
 
 extern int returnID(string word);
+extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern void pause(int dur);
 
 int main(void)
 {
