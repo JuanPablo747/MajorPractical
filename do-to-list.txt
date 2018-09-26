@@ -1,0 +1,6 @@
+
+// need to check if an animal exists before we move it (in move animal function)
+
+// after winning (ie rightBank is full) 'play sound' of all animals in the rightBank 
+
+// after moving animal, if exactly 2 animals are present on the bank that DOES NOT have the boat, then display appropriate game over.
