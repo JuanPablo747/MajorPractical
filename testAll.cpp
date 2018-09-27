@@ -77,9 +77,9 @@ int main(void)
 		if (a[i]==NULL)
 			cout << "NULL" << " ";
 
-	cout << endl << "Testing checkAnimals() function" << endl;
+	cout << endl << "Testing checkPrey() function" << endl;
 		cout << "if it prints 0, the function works" << endl;
-		cout << "Prints: " << A.checkAnimals();
+		cout << "Prints: " << A.checkPrey();
 	cout << endl << endl;
 
 	//testing adding animals to the array and the print function
@@ -91,9 +91,9 @@ int main(void)
 	cout << "Prints: ";
 	A.printBankStatus();
 	
-	cout << endl << "Testing checkAnimals() function" << endl;
+	cout << endl << "Testing checkPrey() function" << endl;
 		cout << "if it prints 3, the function works" << endl;
-		cout << "Prints: " << A.checkAnimals();
+		cout << "Prints: " << A.checkPrey();
 	cout << endl;
 
 
@@ -110,9 +110,9 @@ int main(void)
 	cout << "Prints: ";
 	A.printBankStatus();
 
-	cout << endl << "Testing checkAnimals() function" << endl;
+	cout << endl << "Testing checkPrey() function" << endl;
 		cout << "if it prints 2, the function works" << endl;
-		cout << "Prints: " << A.checkAnimals();
+		cout << "Prints: " << A.checkPrey();
 
 	cout << endl << "Testing checkBank() function on partly full array" << endl;
 	cout << "if it prints false, the function works" << endl;
@@ -120,9 +120,9 @@ int main(void)
 		cout << "Prints: false" << endl << endl;
 
 
-	cout << endl << "Testing checkAnimals() function on array with Cat and Mouse" << endl;
+	cout << endl << "Testing checkPrey() function on array with Cat and Mouse" << endl;
 	cout << "if it prints true, the function works" << endl;
-	if (A.checkAnimals() == 2)
+	if (A.checkPrey() == 2)
 		cout << "Prints: true" << endl << endl;
 
 
