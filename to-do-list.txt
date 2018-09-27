@@ -1,6 +1,6 @@
 
-// need to check if an animal exists before we move it (in move animal function)
+// need to check if an animal exists before we move it (in move animal function)		-- bool checkIfExists(animal* a)
 
-// after winning (ie rightBank is full) 'play sound' of all animals in the rightBank 
+// after winning (ie rightBank is full) 'play sound' of all animals in the rightBank	-- animal** riverbank::returnArray() -> run a forloop over the output and use the 'makeSound' function for each entry in the loop
 
-// after moving animal, if exactly 2 animals are present on the bank that DOES NOT have the boat, then display appropriate game over.
+// after moving animal, if exactly 2 animals are present on the bank that DOES NOT have the boat, then display appropriate game over.	-- int checkPrey()
