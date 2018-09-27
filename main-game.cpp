@@ -16,6 +16,7 @@ extern int returnID(string word);
 extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
 extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition);
+extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightbank, animal* blank);
 
 int main(void)
 {
@@ -24,6 +25,7 @@ int main(void)
 		cat* kitten = new cat;
 		dog* puppy = new dog;
 		mouse* stuart = new mouse;
+		animal* blank = new animal('b', "blank animal");
 
 	// create banks
 		riverbank *leftBank = new riverbank;
@@ -57,9 +59,9 @@ int main(void)
 
 		// at the beginning of each "turn", reset the playerInput (prevent looping an animal)
 		playerInput = "null";
+
+		// print game status
 		printBankStatus(leftBank, rightBank, boatPosition);
-
-
 
 		// give user a chance for input
 			cout << "Type an animal name to place that animal into the boat and send it to the other side, or PASS to move an empty boat." << endl;
@@ -79,35 +81,33 @@ int main(void)
 					else if (returnID(playerInput) == 3)
 						adding = stuart;
 					else if (returnID(playerInput) == 4)
-						adding = stuart;	// placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
+						adding = blank;	// placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
 
 					moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
 
-					if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
-					{
-						system("clear");
-						cout << "You Lose! The dog ate the cat!" << endl;
-						return 0;
-					}
-					if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
-					{
-						system("clear");
-						cout << "You Lose! The cat ate the mouse!" << endl;
-						return 0;
-					}
+					// check if a game losing combination (ie gameover)
+						if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
+						{
+							cout << "You Lose! The dog ate the cat!" << endl;
+							clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
+							return 0;
+						}
+						if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
+						{
+							cout << "You Lose! The cat ate the mouse!" << endl;
+							clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
+							return 0;
+						}
 				}
+
 				//else if still invalid after input, display message.
 				else
 				{
 					cout << playerInput << " is an invalid input. Try again." << endl;
+					pause(2);
+					break;
 				}
 			}
-		
-
-		// check if a game winning or losing combination (ie gameover) OR if game will go for another turn/loop
-
-			// TEST ONLY - force gameOver after 1 move
-				//gameOver = true;
 	}
 
 	cout << endl << "Game closing..." << endl;
@@ -115,12 +115,6 @@ int main(void)
 
 
 //********** TERMINATION **********//
-	//deleting memory allocated
-	delete kitten;
-	delete puppy;
-	delete stuart;
-	delete boatPosition;
-	delete leftBank;
-	delete rightBank;
+	clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
 	return 0;
 }
