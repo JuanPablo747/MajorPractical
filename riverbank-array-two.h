@@ -36,7 +36,7 @@ class riverbank
 	bool checkBank();
 
 	//checks to see whether there is an animal that will eat the other animal on a riverbank
-	int checkAnimals();
+	int checkPrey();
 
 	//returns the amount of animals in the riverbank
 	int countAnimals();
