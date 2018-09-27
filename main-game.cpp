@@ -134,6 +134,19 @@ int main(void)
 						adding = stuart;	// placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
 
 					moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
+
+					if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
+					{
+						system("clear");
+						cout << "You Lose! The dog ate the cat!" << endl;
+						return 0;
+					}
+					if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
+					{
+						system("clear");
+						cout << "You Lose! The cat ate the mouse!" << endl;
+						return 0;
+					}
 				}
 				//else if still invalid after input, display message.
 				else
