@@ -89,28 +89,28 @@ void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, rive
 		//if a valid animal/pass...
 		if(returnID(playerInput) == i)
 		{
-				//if was on left move those animals
-				if (*boatPosition == 0)
-				{
-                    if (i != 4)
-                    {
-					   leftBank->removeAnimal(adding);
-					   rightBank->addAnimal(adding);
-                    }
-                    *boatPosition = 1;
-					break;
-				}
-				// else was on right...
-				else if (*boatPosition == 1)
-				{
-                    if (i != 4)
-                    {
-					   leftBank->addAnimal(adding);
-					   rightBank->removeAnimal(adding);
-                    }
-                    *boatPosition = 0;
-					break;
-				}
+			//if was on left move those animals
+			if (*boatPosition == 0)
+			{
+                    		if (i != 4)
+                    		{
+					leftBank->removeAnimal(adding);
+					rightBank->addAnimal(adding);
+                    		}
+                    	*boatPosition = 1;
+			break;
+			}
+			// else was on right...
+			else if (*boatPosition == 1)
+			{
+                    		if (i != 4)
+                    		{
+					leftBank->addAnimal(adding);
+					rightBank->removeAnimal(adding);
+                    		}
+                    	*boatPosition = 0;
+			break;
+			}
 		}
 	}
 }
