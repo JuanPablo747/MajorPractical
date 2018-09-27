@@ -46,9 +46,7 @@ int main(void)
 		// bool gameOver = false;	// don't need, can remove later
 		string playerInput;
 		// 0 = boat on leftBank, 1 = boat on rightBank	//	can only add an animal to opposite bank and remove from current bank
-		int* boatPosition = new int;	
-		*boatPosition = 0;
-	
+		int* boatPosition = new int(0);	
 	
 
 //********** PLAY THE GAME **********//
