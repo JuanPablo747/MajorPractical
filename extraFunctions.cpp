@@ -81,39 +81,59 @@ int returnID(string word)
 
 
 // function to move boat from 1 bank to another and move an animal (if any)
-void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding){
-	
-	//We are using a for loop so need to store what animal we are adding that corresponds to the input
-	for(int i = 1; i <= 4; i++)
-	{
-		//if a valid animal/pass...
-		if(returnID(playerInput) == i)
-		{
-			//if was on left move those animals
-			if (*boatPosition == 0)
-			{
-                    		if (i != 4)
-                    		{
-					leftBank->removeAnimal(adding);
-					rightBank->addAnimal(adding);
-                    		}
-                    	*boatPosition = 1;
-			break;
-			}
-			// else was on right...
-			else if (*boatPosition == 1)
-			{
-                    		if (i != 4)
-                    		{
-					leftBank->addAnimal(adding);
-					rightBank->removeAnimal(adding);
-                    		}
-                    	*boatPosition = 0;
-			break;
-			}
-		}
-	}
+void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding)
+{
+    for(int i = 1; i <= 4; i++)
+    {
+        //if a valid animal/pass...
+        if(returnID(playerInput) == i)
+        {
+            //if is on left move those animals
+            if (*boatPosition == 0)
+            {
+                // and if the animal entered is NOT on this bank AND didn't enter a pass...
+                if(i != 4 && leftBank->checkIfExists(adding) == false)
+                {
+                    cout << "that animal is on the other bank." << endl;        // the comment is in the above window and gets cleared - got to fix where clear takes place
+                    pause(2);
+                    break;
+                }
+                // if animal entered is on this bank AND not giving a pass
+                if (i != 4)
+                {
+                    leftBank->removeAnimal(adding);
+                    rightBank->addAnimal(adding);
+                    
+                }
+                // as long as any valid input was given, move the boat to the other side.
+                 *boatPosition = 1;
+                 break;
+            }
+            // else is on right...
+            else if (*boatPosition == 1)
+            {
+                // and if the animal entered is NOT on this bank AND didn't enter a pass...
+                if(i != 4 && rightBank->checkIfExists(adding) == false)
+                {
+                    cout << "that animal is on the other bank." << endl;        // the comment is in the above window and gets clear - got to fix where clear takes place
+                    pause(2);
+                    break;
+                }
+                // if animal entered is on this bank AND not giving a pass
+                if (i != 4)
+                {
+                    leftBank->addAnimal(adding);
+                    rightBank->removeAnimal(adding);
+                }
+                // as long as any valid input was given, move the boat to the other side.
+                *boatPosition = 0;
+                 break;
+            }
+        }
+    }
+
 }
+
 
 //********** Print Bank Status **********//
 
@@ -172,4 +192,19 @@ void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPositi
                 }
 
             cout << endl;
+}
+
+
+//********** TERMINATION **********//
+
+//deleting memory allocated
+void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* blank)
+{
+    delete kitten;
+    delete puppy;
+    delete stuart;
+    delete boatPosition;
+    delete leftBank;
+    delete rightBank;
+    delete blank;
 }
