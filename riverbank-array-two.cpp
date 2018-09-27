@@ -65,7 +65,9 @@ void riverbank::printBankStatus()
 	cout << endl;
 }
 
-int riverbank::checkAnimals()
+
+//Function to ceck if two animals will eat each other and return a unique int if they do to show which animal ate waht
+int riverbank::checkPrey()
 {
   //return false if there are no animals, 1 animal or 3 animals
   int counter = 0;
