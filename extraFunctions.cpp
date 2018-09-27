@@ -114,3 +114,62 @@ void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, rive
 		}
 	}
 }
+
+//********** Print Bank Status **********//
+
+void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition)
+{
+    // print game status
+            // print left bank info
+                cout << "There are " << leftBank->countAnimals() << " animals on the Left Bank. ";
+                // if there is at least 1 animal on the bank...
+                if(leftBank->countAnimals() != 0)
+                {
+                    // if there is exactly 1 animal...
+                    if(leftBank->countAnimals() == 1)
+                    {
+                        cout << "It is the ";
+                    }
+                    // if there are 1+ animals...
+                    else
+                    {
+                        cout << "They are ";
+                    }
+                    // regardless, list the animal(s)
+                    leftBank->printBankStatus();
+                }
+                cout << endl;
+
+            // print right bank info
+                cout << "There are " << rightBank->countAnimals() << " animals on the Right Bank. ";
+                // if there is at least 1 animal on the bank...
+                if(rightBank->countAnimals() != 0)
+                {
+                    // if there is exactly 1 animal...
+                    if(rightBank->countAnimals() == 1)
+                    {
+                        cout << "It is the ";
+                    }
+                    // if there are 1+ animals...
+                    else
+                    {
+                        cout << "They are ";
+                    }
+                    // regardless, list the animal(s)
+                    rightBank->printBankStatus();
+                }
+                cout << endl;
+
+            // print/draw boat info
+                cout << "The boat is currently on the ";
+                if(*boatPosition == 0)
+                {
+                    cout << "Left Bank." << endl;
+                }
+                else
+                {
+                    cout << "Right Bank." << endl;
+                }
+
+            cout << endl;
+}
