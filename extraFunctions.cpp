@@ -194,6 +194,34 @@ void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPositi
             cout << endl;
 }
 
+bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition)
+{
+    // check if a game losing combination (ie gameover)
+    if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
+    {
+        cout << "You Lose! The dog ate the cat!" << endl;
+        return true;
+    }
+    if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
+    {
+        cout << "You Lose! The cat ate the mouse!" << endl;
+        return true;
+    }
+    return false;
+}
+
+animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank)
+{
+    if(returnID(playerInput) == 1)
+        return puppy;
+    else if(returnID(playerInput) == 2)
+        return kitten;
+    else if (returnID(playerInput) == 3)
+        return stuart;
+    else
+        return blank; // placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
+} 
+
 
 //********** TERMINATION **********//
 

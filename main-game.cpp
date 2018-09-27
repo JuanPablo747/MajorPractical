@@ -16,11 +16,15 @@ extern int returnID(string word);
 extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
 extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition);
+extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank);
+extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightbank, animal* blank);
+
 
 int main(void)
 {
 //********** INITIALIZATION **********//
+
 	// create animals
 		cat* kitten = new cat;
 		dog* puppy = new dog;
@@ -48,11 +52,15 @@ int main(void)
 	
 
 //********** PLAY THE GAME **********//
+
+	//clearing the screen and starting the game
 	system("clear");
 	cout << "Game starting..." << endl << endl;
 	pause(2);
-	// each run of this loop is a "turn"
-	while(rightBank->checkBank() == false)	// check if a gameOver
+
+
+	//Game will run until there are 3 animals in the right riverbank, every time it runs it is a 'turn'
+	while(rightBank->checkBank() == false)
 	{
 		//clears the screen 
 		system("clear");
@@ -65,6 +73,7 @@ int main(void)
 
 		// give user a chance for input
 			cout << "Type an animal name to place that animal into the boat and send it to the other side, or PASS to move an empty boat." << endl;
+
 			// while an invalid input
 			while(returnID(playerInput) == 99)
 			{	
@@ -74,32 +83,19 @@ int main(void)
 				//if the player has given a valid input, proceed
 				if(returnID(playerInput) != 99)
 				{
-					if(returnID(playerInput) == 1)
-						adding = puppy;
-					else if(returnID(playerInput) == 2)
-						adding = kitten;
-					else if (returnID(playerInput) == 3)
-						adding = stuart;
-					else if (returnID(playerInput) == 4)
-						adding = blank;	// placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
+					//get which animal is going to be moved and store it in adding
+					adding = animalToAdd(playerInput, puppy, kitten, stuart, blank);
 
+					//perform the move from one bank to the next
 					moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
 
-					// check if a game losing combination (ie gameover)
-						if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
-						{
-							cout << "You Lose! The dog ate the cat!" << endl;
-							clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
-							return 0;
-						}
-						if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
-						{
-							cout << "You Lose! The cat ate the mouse!" << endl;
-							clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
-							return 0;
-						}
+					//Check if it is a losing combination e.g. The cat and the mouse are together but the boat is on the otherside
+					if (checkIfLosingCombo(leftBank, rightBank, boatPosition) == true)
+					{
+						clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
+						return 0;
+					}	
 				}
-
 				//else if still invalid after input, display message.
 				else
 				{
