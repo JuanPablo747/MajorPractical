@@ -9,6 +9,8 @@
 
 using namespace std;
 
+
+
 //********** PAUSE Function **********//
 
 void pause(int dur)
@@ -16,6 +18,20 @@ void pause(int dur)
     int temp = time(NULL) + dur;
     
     while(temp > time(NULL));
+}
+
+//********** start Function **********//
+
+void start()
+{
+    string dots = ".";
+    for (int i = 0; i < 3; i++)
+    {
+    system("clear");
+    cout << "Game starting" << dots << endl << endl;
+    dots.append(".");
+    pause(1);
+    }
 }
 
 
@@ -194,6 +210,11 @@ void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPositi
             cout << endl;
 }
 
+
+//********** check if there is a losing combination Function **********//
+//i.e. the dog and the cat are together and the boat is on the opposite riverbank
+
+
 bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition)
 {
     // check if a game losing combination (ie gameover)
@@ -202,14 +223,23 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosi
         cout << "You Lose! The dog ate the cat!" << endl;
         return true;
     }
-    if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
+    else if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
     {
         cout << "You Lose! The cat ate the mouse!" << endl;
+        return true;
+    }
+    else if ((leftBank->checkPrey() == 3 && *boatPosition == 1) || (rightBank->checkPrey() == 3 && *boatPosition == 0))
+    {
+        cout << "You Lose! The cat ate the mouse then the dog ate the cat!" << endl;
         return true;
     }
     return false;
 }
 
+//********** Animal to Add Function **********//
+
+
+//basically uses the input from the player and returns the animal it corresponds to
 animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank)
 {
     if(returnID(playerInput) == 1)

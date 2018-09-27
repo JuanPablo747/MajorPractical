@@ -75,8 +75,10 @@ int riverbank::checkPrey()
     if (bankName[i] == NULL)
       counter++;
 
-  if (counter == 3 || counter == 2 || counter == 0)
+  if (counter == 3 || counter == 2)
       return 0;
+  if (counter == 0)
+      return 3;
 
   //getting the two animals that are in the array
   char a;

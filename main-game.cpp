@@ -12,6 +12,7 @@
 
 using namespace std;
 
+extern void start();
 extern int returnID(string word);
 extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
@@ -19,6 +20,7 @@ extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boa
 extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank);
 extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightbank, animal* blank);
+
 
 
 int main(void)
@@ -52,10 +54,7 @@ int main(void)
 //********** PLAY THE GAME **********//
 
 	//clearing the screen and starting the game
-	system("clear");
-	cout << "Game starting..." << endl << endl;
-	pause(2);
-
+	start();
 
 	//Game will run until there are 3 animals in the right riverbank, every time it runs it is a 'turn'
 	while(rightBank->checkBank() == false)
