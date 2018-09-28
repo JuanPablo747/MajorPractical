@@ -100,8 +100,6 @@ int main(void)
 		}
 	}
 
-	animals(rightBank->returnArray());
-
 	cout << endl << "Game closing..." << endl;
 
 
