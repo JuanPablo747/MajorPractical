@@ -86,11 +86,17 @@ int main(void)
 	cout << "Testing addAnimal() function" << endl;
 	A.addAnimal(kitten);
 	A.addAnimal(puppy);
-	A.addAnimal(stuart);
+	A.addAnimal(stuart); 
 	cout << "If this works, will print Cat Dog Mouse" << endl;
 	cout << "Prints: ";
 	A.printBankStatus();
+
+	//testing the make sound function (polymorphism)
+	cout << endl << "Testing makeSound() function" << endl;
+	animal** b = A.returnArray();
+	for(int j = 0; j < 3; j++) cout << b[j]->makeSound(5) << endl;
 	
+
 	cout << endl << "Testing checkPrey() function" << endl;
 		cout << "if it prints 3, the function works" << endl;
 		cout << "Prints: " << A.checkPrey();
