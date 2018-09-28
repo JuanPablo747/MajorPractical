@@ -20,6 +20,7 @@ extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boa
 extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank);
 extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightbank, animal* blank);
+extern void animals(animal** a);
 
 int main(void)
 {
@@ -98,6 +99,8 @@ int main(void)
 			}
 		}
 	}
+
+	animals(rightBank->returnArray());
 
 	cout << endl << "Game closing..." << endl;
 
