@@ -21,34 +21,30 @@ extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, an
 extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightbank, animal* blank);
 
-
-
 int main(void)
 {
 //********** INITIALIZATION **********//
 
-	// create animals
-		cat* kitten = new cat;
-		dog* puppy = new dog;
-		mouse* stuart = new mouse;
-		animal* blank = new animal('b', "blank animal");
+// create animals
+	cat* kitten = new cat;
+	dog* puppy = new dog;
+	mouse* stuart = new mouse;
+	animal* blank = new animal('b', "blank animal");
+	animal* adding;	// animal we are moving after player enters an input
 
-	// create banks
-		riverbank *leftBank = new riverbank;
-		leftBank->initialiseNULL();
-		leftBank->addAnimal(kitten);
-		leftBank->addAnimal(puppy);
-		leftBank->addAnimal(stuart);
+// create riverbanks
+	riverbank *leftBank = new riverbank;
+	leftBank->initialiseNULL();
+	leftBank->addAnimal(kitten);
+	leftBank->addAnimal(puppy);
+	leftBank->addAnimal(stuart);
 
-		riverbank *rightBank = new riverbank;
-		rightBank->initialiseNULL();
+	riverbank *rightBank = new riverbank;
+	rightBank->initialiseNULL();
 
-	// other initializations
-		animal* adding;			// animal we are moving after player enters an input
-		// bool gameOver = false;	// don't need, can remove later
-		string playerInput;
-		// 0 = boat on leftBank, 1 = boat on rightBank	//	can only add an animal to opposite bank and remove from current bank
-		int* boatPosition = new int(0);	
+// other initializations
+	string playerInput;
+	int* boatPosition = new int(0);	// 0 = left, 1 = right
 	
 
 //********** PLAY THE GAME **********//
@@ -69,38 +65,38 @@ int main(void)
 		printBankStatus(leftBank, rightBank, boatPosition);
 
 		// give user a chance for input
-			cout << "Type an animal name to place that animal into the boat and send it to the other side, or PASS to move an empty boat." << endl;
+		cout << "Which animal do you want to move? Type pass to just move the boat: " << endl;
 
-			// while an invalid input
-			while(returnID(playerInput) == 99)
-			{	
-				//geting input from the user
-				cin >> playerInput;
+		// while an invalid input
+		while(returnID(playerInput) == 99)
+		{	
+			//geting input from the user
+			cin >> playerInput;
 
-				//if the player has given a valid input, proceed
-				if(returnID(playerInput) != 99)
+			//if the player has given a valid input, proceed
+			if(returnID(playerInput) != 99)
+			{
+				//get which animal is going to be moved and store it in adding
+				adding = animalToAdd(playerInput, puppy, kitten, stuart, blank);
+
+				//perform the move from one bank to the next
+				moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
+
+				//Check if it is a losing combination e.g. The cat and the mouse are together but the boat is on the otherside
+				if (checkIfLosingCombo(leftBank, rightBank, boatPosition) == true)
 				{
-					//get which animal is going to be moved and store it in adding
-					adding = animalToAdd(playerInput, puppy, kitten, stuart, blank);
-
-					//perform the move from one bank to the next
-					moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
-
-					//Check if it is a losing combination e.g. The cat and the mouse are together but the boat is on the otherside
-					if (checkIfLosingCombo(leftBank, rightBank, boatPosition) == true)
-					{
-						clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
-						return 0;
-					}	
-				}
-				//else if still invalid after input, display message.
-				else
-				{
-					cout << playerInput << " is an invalid input. Try again." << endl;
-					pause(2);
-					break;
-				}
+					clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
+					return 0;
+				}	
 			}
+			//else if still invalid after input, display message.
+			else
+			{
+				cout << playerInput << " is an invalid input. Try again." << endl;
+				pause(2);
+				break;
+			}
+		}
 	}
 
 	cout << endl << "Game closing..." << endl;
