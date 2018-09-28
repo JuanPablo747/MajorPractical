@@ -19,7 +19,7 @@ string mouse::makeSound(int repeats){
 	string squeak = "";
 	for(int i = 0; i < repeats; i++)
 	{
-		squeak = squeak + "Skrrr";
+		squeak = squeak + "Skrr";
 		// if going for another loop, add a space
 		if(i+1 != repeats)
 		{

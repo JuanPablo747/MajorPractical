@@ -19,7 +19,7 @@ dog::~dog(){};
 string dog::makeSound(int repeats){
 	string bark = "";
 	for(int i=0;i<repeats;i++){
-		bark = bark + "WOOF!";
+		bark = bark + "Woof";
 		// if going for another loop, add a space
 		if(i+1 != repeats)
 		{
