@@ -252,7 +252,104 @@ animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* s
         return blank; // placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
 } 
 
+//********** End of Game Function **********//
 
+
+void endGame(animal** riverbank)
+{
+    system("clear");
+
+    pause(1);
+    cout<<"OHH SHIT!! DID YOU JUST WIN??"<<endl;
+    pause(2);
+    system("clear");
+    cout<<"Seems like you actually transported the animals, without the animals eating each other!!!"<<endl;
+    pause(2);
+    cout<<endl;
+    cout<<"Fun Fact: Only 3 out of 10 get till the end champ!!"<<endl;
+    pause(2);
+    cout<<endl;
+    cout<<"CONGRATULATIONS!!"<<endl;
+    cout<<endl;
+    pause(2);
+    cout<<"The following animals on the other side of the river bank are:"<<endl;
+    pause(3);
+
+    for(int i = 0; i < 3; i++)
+    {
+        if(riverbank[i]->getInitial() == 'c')
+        {
+            system("clear");
+            cout << "A cat.." << endl << endl;
+            cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
+            cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
+            cout << "     ▏┏┳╮ ╭┳┓ ▕  ┃┃" << endl;
+            cout << "     ▏╰┻┛▼┗┻╯ ▕  ┃┃" << endl;
+            cout << "     ╲  ╰┻╯   ╱▔▔ ┃" << endl;
+            cout << "      ╰━┳━━━ ╯    ┃" << endl;
+            cout << "        ┃┏┓┣━━┳┳┓┃" << endl;
+            cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
+            pause(1);
+
+            system("clear");
+            cout << "A cat.." << endl << endl;
+            cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
+            cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
+            cout << "     ▏┏┳╮ ╭┳┓ ▕  ┃┃" << endl;
+            cout << "  _  ▏╰┻┛▼┗┻╯ ▕  ┃┃" << endl;
+            cout << "     ╲  ╰┻╯   ╱▔▔ ┃" << endl;
+            cout << "  /  |╰━┳━━━ ╯    ┃" << endl;
+            cout << " " << riverbank[i]->makeSound(1) << "   ┃┏┓┣━━┳┳┓┃" << endl;
+            cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
+            pause(1);
+        }
+
+        else if (riverbank[i]->getInitial() == 'd')
+        {
+            system("clear");
+            cout << "A dog.." << endl << endl;
+            cout << "    ╱▏      ▕╲▕╲" << endl;
+            cout << "    ▏▏      ▕▏▔▔╲" << endl;
+            cout << "    ▏╲      ╱ ▔ ▔╲" << endl;
+            cout << "    ╲▏▔▔▔▔▔▔╯╯╰┳━━▀" << endl;
+            cout << "     ▏╯╯╯╯╯╯╯╯╱┃" << endl;
+            cout << "     ┃┏┳┳━━━┫┣┳┃" << endl;
+            cout << "     ┃┃┃┃   ┃┃┃┃" << endl;
+            cout << "     ┗┛┗┛   ┗┛┗┛" << endl;
+            pause(1);
+            system("clear");
+            cout << "A dog.." << endl << endl;
+            cout << "    ╱▏      ▕╲▕╲" << endl;
+            cout << "    ▏▏      ▕▏▔▔╲" << endl;
+            cout << "    ▏╲      ╱ ▔ ▔╲" << endl;
+            cout << "    ╲▏▔▔▔▔▔▔╯╯╰┳━━▀" << endl;
+            cout << "     ▏╯╯╯╯╯╯╯╯╱┃ / | \\" << endl;
+            cout << "     ┃┏┳┳━━━┫┣┳┃  " << riverbank[i]->makeSound(1) << endl;
+            cout << "     ┃┃┃┃   ┃┃┃┃" << endl;
+            cout << "     ┗┛┗┛   ┗┛┗┛" << endl;
+            pause(1);
+        }
+        else if(riverbank[i]->getInitial() == 'm')
+        {
+            system("clear");
+            cout << "A mouse.." << endl << endl;
+            cout << "                    ___" << endl;
+            cout << "           _  _  .-'   '-." << endl;
+            cout << "          (.)(.)/         \\  " << endl;
+            cout << "           /@@             ;          /   " << endl;
+            cout << "          o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
+            pause(1);
+            system("clear");
+            cout << "A mouse.." << endl << endl;
+            cout << "                    ___" << endl;
+            cout << "           _  _  .-'   '-." << endl;
+            cout << "          (.)(.)/         \\  " << endl;
+            cout << riverbank[i]->makeSound(1) << "   _\\  /@@             ;          /   " << endl;
+            cout << "        / o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
+            pause(1);
+        }
+    }
+}
 
 //********** TERMINATION **********//
 
