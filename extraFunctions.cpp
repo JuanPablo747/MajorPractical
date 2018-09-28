@@ -267,3 +267,5 @@ void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, rive
     delete rightBank;
     delete blank;
 }
+
+// null edit
