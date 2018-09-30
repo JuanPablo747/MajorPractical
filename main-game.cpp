@@ -14,12 +14,16 @@ using namespace std;
 
 extern void start();
 extern int returnID(string word);
-extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
 extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition);
 extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank);
 extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightbank, animal* blank);
+extern void boat(int location);
+extern void initialBoat();
+extern void rightBoat();
+extern void intro();
 extern void endGame(animal** a);
 
 int main(void)
@@ -52,6 +56,7 @@ int main(void)
 
 	//clearing the screen and starting the game
 	start();
+	intro();
 
 	//Game will run until there are 3 animals in the right riverbank, every time it runs it is a 'turn'
 	while(rightBank->checkBank() == false)
@@ -66,7 +71,7 @@ int main(void)
 		printBankStatus(leftBank, rightBank, boatPosition);
 
 		// give user a chance for input
-		cout << "Which animal do you want to move? Type pass to just move the boat: " << endl;
+		cout << "Which animal do you want to move? Type pass to just move the boat: ";
 
 		// while an invalid input
 		while(returnID(playerInput) == 99)
@@ -81,7 +86,10 @@ int main(void)
 				adding = animalToAdd(playerInput, puppy, kitten, stuart, blank);
 
 				//perform the move from one bank to the next
-				moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding);
+				if (moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding) == true)
+				{
+					boat(*boatPosition); //play the boat animation
+				}
 
 				//Check if it is a losing combination e.g. The cat and the mouse are together but the boat is on the otherside
 				if (checkIfLosingCombo(leftBank, rightBank, boatPosition) == true)
