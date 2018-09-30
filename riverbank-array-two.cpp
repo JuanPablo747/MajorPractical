@@ -54,13 +54,20 @@ bool riverbank::checkBank()
 //Prints the status of the bank or what is in the array
 void riverbank::printBankStatus()
 {
+  int And = 0;
+
 	for (int i = 0; i < 3; i++)
 	{
 		//if the animal isnt a 'blank' animal, it will print it's species to the screen
 		if (bankName[i] != NULL)
 		{
 			cout << bankName[i]->getSpecies() << " ";
+      And++;
 		}
+    if(And == (count - 1))
+    {
+      cout << "and ";
+    }
 	}
 	cout << endl;
 }
