@@ -47,10 +47,20 @@ void intro()
     cout << "A man has to take a dog, a cat, and a mouse across a river. He can only take one of the animals across at a time. If the dog is left alone with the cat, the dog will eat the cat. If the cat is left alone with the mouse, the cat will eat the mouse. How does he get the three animals across the river?" << endl << endl << endl;
 
     cout << "continue: (y/n)" << endl;
-    char answer2 = 'n';
-    while (answer2 != 'y')
+    char answer2 = 'g';
+    while(answer2 != 'y')
     {
-        cin >> answer2;
+        if (answer2 == 'y'){
+            break;
+        }
+        else if (answer2 == 'n'){
+            cout << "too bad - you're playing!" << endl;
+            pause(3);
+            answer2= 'y';
+            break;
+        }
+
+    cin >> answer2;
     }
     system("clear");
 }
@@ -391,9 +401,6 @@ void endGame(animal** riverbank)
     pause(2);
     system("clear");
     cout<<"Seems like you actually transported the animals, without the animals eating each other!!!"<<endl;
-    pause(2);
-    cout<<endl;
-    cout<<"Fun Fact: Only 3 out of 10 get till the end champ!!"<<endl;
     pause(2);
     cout<<endl;
     cout<<"CONGRATULATIONS!!"<<endl;
