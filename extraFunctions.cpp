@@ -389,7 +389,7 @@ animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* s
     else if (returnID(playerInput) == 3)
         return stuart;
     else
-        return blank; // placeholder, shouldn't use this value but gauntees an 'adding' for proceeding function
+        return blank; // placeholder, shouldn't use this value but guantees an 'adding' for proceeding function
 } 
 
 void endGame(animal** riverbank)
@@ -409,77 +409,15 @@ void endGame(animal** riverbank)
     cout<<"The following animals on the other side of the river bank are:"<<endl;
     pause(3);
 
+    // play animations of all 3 animals
     for(int i = 0; i < 3; i++)
     {
-        if(riverbank[i]->getInitial() == 'c')
+        // draw 2 frames
+        for(int j = 1; j <=2; j++)
         {
             system("clear");
-            cout << "A cat.." << endl << endl;
-            cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
-            cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
-            cout << "     ▏┏┳╮ ╭┳┓ ▕  ┃┃" << endl;
-            cout << "     ▏╰┻┛▼┗┻╯ ▕  ┃┃" << endl;
-            cout << "     ╲  ╰┻╯   ╱▔▔ ┃" << endl;
-            cout << "      ╰━┳━━━ ╯    ┃" << endl;
-            cout << "        ┃┏┓┣━━┳┳┓┃" << endl;
-            cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
-            pause(1);
-
-            system("clear");
-            cout << "A cat.." << endl << endl;
-            cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
-            cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
-            cout << "     ▏┏┳╮ ╭┳┓ ▕  ┃┃" << endl;
-            cout << "  _  ▏╰┻┛▼┗┻╯ ▕  ┃┃" << endl;
-            cout << "     ╲  ╰┻╯   ╱▔▔ ┃" << endl;
-            cout << "  /  |╰━┳━━━ ╯    ┃" << endl;
-            cout << " " << riverbank[i]->makeSound(1) << "   ┃┏┓┣━━┳┳┓┃" << endl;
-            cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
-            pause(1);
-        }
-
-        else if (riverbank[i]->getInitial() == 'd')
-        {
-            system("clear");
-            cout << "A dog.." << endl << endl;
-            cout << "    ╱▏      ▕╲▕╲" << endl;
-            cout << "    ▏▏      ▕▏▔▔╲" << endl;
-            cout << "    ▏╲      ╱ ▔ ▔╲" << endl;
-            cout << "    ╲▏▔▔▔▔▔▔╯╯╰┳━━▀" << endl;
-            cout << "     ▏╯╯╯╯╯╯╯╯╱┃" << endl;
-            cout << "     ┃┏┳┳━━━┫┣┳┃" << endl;
-            cout << "     ┃┃┃┃   ┃┃┃┃" << endl;
-            cout << "     ┗┛┗┛   ┗┛┗┛" << endl;
-            pause(1);
-            system("clear");
-            cout << "A dog.." << endl << endl;
-            cout << "    ╱▏      ▕╲▕╲" << endl;
-            cout << "    ▏▏      ▕▏▔▔╲" << endl;
-            cout << "    ▏╲      ╱ ▔ ▔╲" << endl;
-            cout << "    ╲▏▔▔▔▔▔▔╯╯╰┳━━▀" << endl;
-            cout << "     ▏╯╯╯╯╯╯╯╯╱┃ / | \\" << endl;
-            cout << "     ┃┏┳┳━━━┫┣┳┃  " << riverbank[i]->makeSound(1) << endl;
-            cout << "     ┃┃┃┃   ┃┃┃┃" << endl;
-            cout << "     ┗┛┗┛   ┗┛┗┛" << endl;
-            pause(1);
-        }
-        else if(riverbank[i]->getInitial() == 'm')
-        {
-            system("clear");
-            cout << "A mouse.." << endl << endl;
-            cout << "                    ___" << endl;
-            cout << "           _  _  .-'   '-." << endl;
-            cout << "          (.)(.)/         \\  " << endl;
-            cout << "           /@@             ;          /   " << endl;
-            cout << "          o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
-            pause(1);
-            system("clear");
-            cout << "A mouse.." << endl << endl;
-            cout << "                    ___" << endl;
-            cout << "           _  _  .-'   '-." << endl;
-            cout << "          (.)(.)/         \\  " << endl;
-            cout << riverbank[i]->makeSound(1) << "   _\\  /@@             ;          /   " << endl;
-            cout << "        / o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
+            cout << "A " << riverbank[i]->getSpecies() << endl << endl;
+            riverbank[i]->drawAnimal(j);
             pause(1);
         }
     }
