@@ -16,7 +16,8 @@ class cat : public animal
 
 		//*getters*
 		std::string makeSound(int repeats);	// make a cat sound with number of repeats
-
+		void drawAnimal(int frame);
+		
 		//*setters*
 		
 		//*destructors*
