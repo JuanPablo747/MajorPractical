@@ -62,12 +62,13 @@ void riverbank::printBankStatus()
 		if (bankName[i] != NULL)
 		{
 			cout << bankName[i]->getSpecies() << " ";
-      And++;
+      			And++;
+			if((And == (count - 1)) && (count > 1))
+    			{
+      				cout << "and ";
+    			}
 		}
-    if(And == (count - 1))
-    {
-      cout << "and ";
-    }
+    		
 	}
 	cout << endl;
 }
