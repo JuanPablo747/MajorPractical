@@ -25,18 +25,19 @@ int main(void)
 
 	cout << "TESTING ANIMALS" << endl << endl;
 
-	cout << "test: create animal with default generic animal constructor..." << endl;
-	animal defaultAnimal(117, "Undefined Animal");	// 117 = u
+	// cout << "test: create animal with default generic animal constructor..." << endl;
+	// animal defaultAnimal(117, "Undefined Animal");	// 117 = u, pure virtual; can't do this anymore 
 
 	//testing getters
-	cout << defaultAnimal.getSpecies() << " has the initial " << defaultAnimal.getInitial() << endl;
-	cout << endl;
-	// test setters
-	cout << "test: use setters to re-define undefined animal..." << endl;
-	defaultAnimal.setInitial(99);	//102 = c
-	defaultAnimal.setSpecies("Fake Cat");
-	cout << defaultAnimal.getSpecies() << " has the initial " << defaultAnimal.getInitial() << endl;
-	cout << endl;
+		// cout << defaultAnimal.getSpecies() << " has the initial " << defaultAnimal.getInitial() << endl;
+		// cout << endl;
+
+	// // test setters
+	// cout << "test: use setters to re-define undefined animal..." << endl;
+	// defaultAnimal.setInitial(99);	//102 = c
+	// defaultAnimal.setSpecies("Fake Cat");
+	// cout << defaultAnimal.getSpecies() << " has the initial " << defaultAnimal.getInitial() << endl;
+	// cout << endl;
 
 	// Creating animal pointers to a cat, dog and mouse and testing their functions
 	cout << "test: create cat with cat constructor, then get species, initial and sound..." << endl;
@@ -106,7 +107,7 @@ int main(void)
 	A.addAnimal(kitten);
 	A.addAnimal(puppy);
 	A.addAnimal(stuart); 
-	cout << "If this works, will print Cat Dog Mouse" << endl;
+	cout << "If this works, will print Cat Dog and Mouse" << endl;
 	cout << "Prints: ";
 	A.printBankStatus();
 
@@ -134,7 +135,7 @@ int main(void)
 	//testing removing animals to the array
 	cout << "Testing removeAnimal() function - remove a dog" << endl;
 	A.removeAnimal(puppy);
-	cout << "If this works, will print Cat Mouse" << endl;
+	cout << "If this works, will print Cat and Mouse" << endl;
 	cout << "Prints: ";
 	A.printBankStatus();
 
@@ -143,25 +144,25 @@ int main(void)
 		cout << "// 2 = cat eats mouse" << endl;
 		cout << "Prints: " << A.checkPrey();
 
-	cout << endl << "Testing checkBank() function on partly full array" << endl;
-	cout << "if it prints false, the function works" << endl;
-	if (A.checkBank() == false)
-		cout << "Prints: false" << endl << endl;
-
-
 	cout << endl << "Testing checkPrey() function on array with Cat and Mouse" << endl;
 	cout << "if it prints true, the function works" << endl;
 	if (A.checkPrey() == 2)
 		cout << "Prints: true" << endl << endl;
 
+	cout << endl << "Testing checkBank() function on partly full array" << endl;
+	cout << "if it prints false, the function works" << endl;
+	if (A.checkBank() == false)
+		cout << "Prints: false" << endl << endl;
 
 	cout << "Testing checkIfExists() function on array with Cat and Mouse (searching for cat)" << endl;
+	cout << "purpose: ensure can 'collect' cat if cat DOES exist in this bank" << endl;
 	cout << "if it prints true, the function works" << endl;
 	if (A.checkIfExists(kitten) == true)
 		cout << "Prints: true" << endl << endl;
 
 
 	cout << "Testing checkIfExists() function on array with Cat and Mouse (searching for dog)" << endl;
+	cout << "purpose: ensure can't 'collect' dog if dog isn't in this bank" << endl;
 	cout << "if it prints false, the function works" << endl;
 	if (A.checkIfExists(puppy) == false)
 		cout << "Prints: false" << endl;
