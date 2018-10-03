@@ -1,5 +1,6 @@
 // ------ // ------ // set-up // ------ // ------ //
 #include <string>
+#include <iostream>
 #include "dog.h"
 
 using namespace std;
@@ -28,4 +29,31 @@ string dog::makeSound(int repeats){
 	}
 	return bark;
 }
+
+void dog::drawAnimal(int frame){
+	if(frame == 1)
+	{
+		cout << "    ╱▏      ▕╲▕╲" << endl;
+		cout << "    ▏▏      ▕▏▔▔╲" << endl;
+		cout << "    ▏╲      ╱ ▔ ▔╲" << endl;
+		cout << "    ╲▏▔▔▔▔▔▔╯╯╰┳━━▀" << endl;
+		cout << "     ▏╯╯╯╯╯╯╯╯╱┃" << endl;
+		cout << "     ┃┏┳┳━━━┫┣┳┃" << endl;
+		cout << "     ┃┃┃┃   ┃┃┃┃" << endl;
+		cout << "     ┗┛┗┛   ┗┛┗┛" << endl;
+	}
+	
+	else if (frame == 2)
+	{
+		cout << "    ╱▏      ▕╲▕╲" << endl;
+		cout << "    ▏▏      ▕▏▔▔╲" << endl;
+		cout << "    ▏╲      ╱ ▔ ▔╲" << endl;
+		cout << "    ╲▏▔▔▔▔▔▔╯╯╰┳━━▀" << endl;
+		cout << "     ▏╯╯╯╯╯╯╯╯╱┃ / | \\" << endl;
+		cout << "     ┃┏┳┳━━━┫┣┳┃  " << makeSound(1) << endl;
+		cout << "     ┃┃┃┃   ┃┃┃┃" << endl;
+		cout << "     ┗┛┗┛   ┗┛┗┛" << endl;
+	}
+}
+
 // ------ // ------ // setters // ------ // ------ //
