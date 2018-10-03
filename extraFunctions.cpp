@@ -46,7 +46,7 @@ void intro()
     cout << "The Riddle:" << endl; 
     cout << "A man has to take a dog, a cat, and a mouse across a river. He can only take one of the animals across at a time. If the dog is left alone with the cat, the dog will eat the cat. If the cat is left alone with the mouse, the cat will eat the mouse. How does he get the three animals across the river?" << endl << endl << endl;
 
-    cout << "contunue: (y/n)" << endl;
+    cout << "continue: (y/n)" << endl;
     char answer2 = 'n';
     while (answer2 != 'y')
     {
