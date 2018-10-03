@@ -1,5 +1,6 @@
 // ------ // ------ // set-up // ------ // ------ //
 #include <string>
+#include <iostream>
 #include "cat.h"
 
 using namespace std;
@@ -32,6 +33,32 @@ string cat::makeSound(int repeats){
 		}
 	}
 	return cry;
+}
+
+void cat::drawAnimal(int frame){
+	if(frame == 1)
+	{
+		cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
+		cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
+		cout << "     ▏┏┳╮ ╭┳┓ ▕  ┃┃" << endl;
+		cout << "     ▏╰┻┛▼┗┻╯ ▕  ┃┃" << endl;
+		cout << "     ╲  ╰┻╯   ╱▔▔ ┃" << endl;
+		cout << "      ╰━┳━━━ ╯    ┃" << endl;
+		cout << "        ┃┏┓┣━━┳┳┓┃" << endl;
+		cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
+	}
+	
+	else if (frame == 2)
+	{
+		cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
+		cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
+		cout << "     ▏┏┳╮ ╭┳┓ ▕  ┃┃" << endl;
+		cout << "  _  ▏╰┻┛▼┗┻╯ ▕  ┃┃" << endl;
+		cout << "     ╲  ╰┻╯   ╱▔▔ ┃" << endl;
+		cout << "  /  |╰━┳━━━ ╯    ┃" << endl;
+		cout << " " << makeSound(1) << "   ┃┏┓┣━━┳┳┓┃" << endl;
+		cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
+	}
 }
 
 // ------ // ------ // setters // ------ // ------ //
