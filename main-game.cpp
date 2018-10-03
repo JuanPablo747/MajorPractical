@@ -34,7 +34,10 @@ int main(void)
 	cat* kitten = new cat;
 	dog* puppy = new dog;
 	mouse* stuart = new mouse;
-	animal* blank = new animal('b', "blank animal");
+	dog* blank = new dog;
+	// blank animal used for passing; is a subclass since parent is pure virtual
+		blank->setInitial('b');
+		blank->setSpecies("blank animal");
 	animal* adding;	// animal we are moving after player enters an input
 
 // create riverbanks
