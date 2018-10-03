@@ -1,6 +1,7 @@
 // ------ // ------ // set-up // ------ // ------ //
-#include "mouse.h"
 #include <string>
+#include <iostream>
+#include "mouse.h"
 
 using namespace std;
 
@@ -28,4 +29,25 @@ string mouse::makeSound(int repeats){
 	}
 	return squeak;
 }
+
+void mouse::drawAnimal(int frame){
+	if(frame == 1)
+	{
+		cout << "                    ___" << endl;
+		cout << "           _  _  .-'   '-." << endl;
+		cout << "          (.)(.)/         \\  " << endl;
+		cout << "           /@@             ;          /   " << endl;
+		cout << "          o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
+	}
+
+	else if (frame == 2)
+	{
+		cout << "                    ___" << endl;
+		cout << "           _  _  .-'   '-." << endl;
+		cout << "          (.)(.)/         \\  " << endl;
+		cout << makeSound(1) << "   _\\  /@@             ;          /   " << endl;
+		cout << "        / o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
+	}
+}
+
 // ------ // ------ // setters // ------ // ------ //
