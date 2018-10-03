@@ -11,6 +11,7 @@ class mouse : public animal{
 	public:
 		mouse();
 		std::string makeSound(int repeats);
+		void drawAnimal(int frame);
 		~mouse();
 };
 
