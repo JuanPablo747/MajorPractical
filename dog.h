@@ -11,6 +11,7 @@ class dog : public animal{
 	public:
 		dog();
 		std::string makeSound(int repeats);
+		void drawAnimal(int frame);
 		~dog();
 };
 

@@ -427,7 +427,7 @@ void endGame(animal** riverbank)
 //********** TERMINATION **********//
 
 //deleting memory allocated
-void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* blank)
+void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightBank, dog* blank)
 {
     delete kitten;
     delete puppy;
