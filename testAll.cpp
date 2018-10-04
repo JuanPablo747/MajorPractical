@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
+
 #include "animal.h"
 #include "dog.h"
 #include "cat.h"
@@ -17,164 +19,211 @@ extern void pause(int dur);
 
 int main(void)
 {
-	cout << endl << "==== ==== ==== ==== ====" << endl << "Program starts here" << endl << "==== ==== ==== ==== ====" << endl << endl;
+	cout << endl << "==== ==== ==== ==== ====" << endl << "Program starts here" << endl << "==== ==== ==== ==== ====" << endl;
 
 	//********** Testing creating all the animals **********//
 
 	//Testing creating an animal and setting it's initial and species
 
-	cout << "TESTING ANIMALS" << endl << endl;
+	cout << endl << "TESTING ANIMALS" << endl << endl;
 
-	// cout << "test: create animal with default generic animal constructor..." << endl;
-	// animal defaultAnimal(117, "Undefined Animal");	// 117 = u, pure virtual; can't do this anymore 
-
-	//testing getters
-		// cout << defaultAnimal.getSpecies() << " has the initial " << defaultAnimal.getInitial() << endl;
-		// cout << endl;
-
-	// // test setters
-	// cout << "test: use setters to re-define undefined animal..." << endl;
-	// defaultAnimal.setInitial(99);	//102 = c
-	// defaultAnimal.setSpecies("Fake Cat");
-	// cout << defaultAnimal.getSpecies() << " has the initial " << defaultAnimal.getInitial() << endl;
-	// cout << endl;
-
-	// Creating animal pointers to a cat, dog and mouse and testing their functions
-	cout << "test: create cat with cat constructor, then get species, initial and sound..." << endl;
-	cat* kitten = new cat;
-	cout << kitten->getSpecies() << " has the initial " << kitten->getInitial() << ", " << kitten->getSpecies() << "'s go " << kitten->makeSound(2) <<endl;
-	cout << endl;
-	cout << "test: create dog with dog constructor, then get species, initial and sound..." << endl;
-	dog* puppy = new dog;
-	cout << puppy->getSpecies() << " has the initial " << puppy->getInitial() << ", " << puppy->getSpecies() << "'s go " << puppy->makeSound(2)<<endl;
-	cout << endl;
-	cout << "test: create mouse with mouse constructor, then get species, initial and sound..." << endl;
-	mouse* stuart = new mouse;
-	cout << stuart->getSpecies() << " has the initial " << stuart->getInitial() << ", " << stuart->getSpecies() << "'s go " << stuart->makeSound(2)<<endl;
+	// constructor and getter tests
+	cout << "Test: create each animal with its default sub-class constructor, then use its getters." << endl;
 	
+	cat* kitten = new cat;
+	cout << kitten->getSpecies() << " has the initial " << kitten->getInitial() << ". Its goes " << kitten->makeSound(2) <<endl << endl;
+
+	dog* puppy = new dog;
+	cout << puppy->getSpecies() << " has the initial " << puppy->getInitial() << ". Its goes " << puppy->makeSound(2)<<endl << endl;
+
+	mouse* stuart = new mouse;
+	cout << stuart->getSpecies() << " has the initial " << stuart->getInitial() << ". Its goes " << stuart->makeSound(2)<<endl << endl;
+
+	// setter tests
+	cout << "Test animal setters:" << endl;
+	cat* fakecat = new cat;
+	cout << "1st - create a cat with default constructor, then use its getters..." << endl;
+	cout << fakecat->getSpecies() << " has the initial " << fakecat->getInitial() << ". Its goes " << fakecat->makeSound(2) <<endl << endl;
+	cout << "2nd - replace this cat's states with parent class's setters, then call its getters again." << endl;
+	fakecat->setInitial('W');
+	fakecat->setSpecies("Blue Whale");
+	cout << "The new initial and species are:" << endl << fakecat->getInitial() << " and " << fakecat->getSpecies() << endl;
+
 
 	//********** Testing returnID function **********//
 
-	//the function take a string and retuns an integer 1 for dog or any variation (dOg, Dog, doG), 2 for cat, 3 for mouse or 4 for pass
-	cout << endl << endl <<"TESTING RETURN ID FUNCTION" << endl;
-	cout << "the following tests return the ID of the animal when different inputs are inserted..." << endl;
-	cout << "// 1 = dog; 2 = cat; 3 = mouse; 4 = successful_pass; 99 = failed entry" << endl << endl;
-
-	cout << "test: different casing of the same word..." << endl;
-	cout << "Dog - If this works, will print 1: " << returnID("dog") << endl;
-	cout << "DOg - If this works, will print 1: " << returnID("dOg") << endl;
-	cout << "DoG - If this works, will print 1: " << returnID("doG") << endl;
-	cout << "DOG - If this works, will print 1: " << returnID("DOG") << endl;
+	// test player inputs
+	cout << endl << "TESTING RETURN ID FUNCTION" << endl << endl;
+	cout << "Return IDs are used when converting a player input into the game." << endl;
+	cout << "// 1 = dog; 2 = cat; 3 = mouse; 4 = successful_pass; 99 = failed_entry" << endl;
 	cout << endl;
 
-	cout << "test: different valid words..." << endl;
-	cout << "Cat - If this works, will print 2: " << returnID("cat") << endl;
-	cout << "Mouse - If this works, will print 3: " << returnID("mouse") << endl;
-	cout << "Pass - If this works, will print 4: " << returnID("pass") << endl;
+	cout << "Test different casing of the same word." << endl;
+	cout << "input = Dog // expected_result = 1 // actual_result = " << returnID("dog") << endl;
+	cout << "input = DOg // expected_result = 1 // actual_result = " << returnID("dOg") << endl;
+	cout << "input = DoG // expected_result = 1 // actual_result = " << returnID("doG") << endl;
+	cout << "input = DOG // expected_result = 1 // actual_result = " << returnID("DOG") << endl;
 	cout << endl;
 
-	cout << "test: an unrecognised word..." << endl;
-	cout << "Blah - If this works, will print 99: " << returnID("Blah") << endl;
+	cout << "Test all other valid words." << endl;
+	cout << "input = Cat // expected_result = 2 // actual_result = " << returnID("Cat") << endl;
+	cout << "input = Mouse // expected_result = 3 // actual_result = " << returnID("Mouse") << endl;
+	cout << "input = Pass // expected_result = 4 // actual_result = " << returnID("Pass") << endl;
+	cout << endl;
 
+	cout << "Test unrecognised words/symbols." << endl;
+	cout << "input = Blah // expected_result = 99 // actual_result = " << returnID("Blah") << endl;
+	cout << "input = Frog // expected_result = 99 // actual_result = " << returnID("Frog") << endl;
+	cout << "input = cats // expected_result = 99 // actual_result = " << returnID("cats") << endl;
+	cout << "input = >.< // expected_result = 99 // actual_result = " << returnID(">.<") << endl;
+	cout << endl;
 
 	//********** Testing riverbank class and its functions **********//
 
-	cout << endl << endl << "TESTING RIVERBANK CLASS" << endl << endl;
+	cout << endl << "TESTING RIVERBANK CLASS" << endl << endl;
 	// default riverbank constructor
 	riverbank A;
 
-	//initialiseNULL() test
+	// test initialiseNULL()
 	A.initialiseNULL();
 	animal** a = A.returnArray();
 	cout << "Testing initialiseNULL() function" << endl;
-		cout << "if it prints NULL three times, the function works" << endl;
-		cout << "// NULL = empty entry in i'th element of array" << endl;
-		cout << "Prints: ";
+	cout << "// if it prints NULL three times, the function works" << endl;
+	cout << "// NULL = empty entry in i'th element of array" << endl;
+	cout << "actual_result = ";
 	for(int i = 0; i < 3; i++)
 		if (a[i]==NULL)
 			cout << "NULL" << " ";
+	cout << endl << endl;
 
-	cout << endl;
-
-	cout << endl << endl << "Testing checkPrey() function" << endl;
-		cout << "if it prints 0, the function works" << endl;
-		cout << "// 0 = empty bank, impossible for this bank to cause Game Over" << endl;
-		cout << "Prints: " << A.checkPrey();
+	cout << "Testing checkPrey() function" << endl;
+	cout << "// 0 = empty bank, impossible for this bank to cause Game Over" << endl;
+	cout << "expected_result = 0" << endl;
+	cout << "actual_result = " << A.checkPrey();
 	cout << endl << endl;
 
 	//testing adding animals to the array and the print function
 	cout << "Testing addAnimal() function" << endl;
+	cout << "// adding cat, then dog, then mouse to riverbank array" << endl;
 	A.addAnimal(kitten);
 	A.addAnimal(puppy);
 	A.addAnimal(stuart); 
-	cout << "If this works, will print Cat Dog and Mouse" << endl;
-	cout << "Prints: ";
+	cout << "expected_result = Cat Dog and Mouse" << endl;
+	cout << "actual_result = ";
 	A.printBankStatus();
 
-	//testing the make sound function (polymorphism)
+	// testing the make sound function (polymorphism)
 	cout << endl << "Testing makeSound() function" << endl;
-	cout << endl << "tests if its possible to call sound of animals in riverbank array" << endl;
+	cout << "// tests polymorphism // array[i]->makeSound(5 repeats)" << endl;
+	cout << "actual_result = " << endl;
 	animal** b = A.returnArray();
-	for(int j = 0; j < 3; j++) cout << b[j]->makeSound(5) << endl;
+	for(int j = 0; j < 3; j++)
+	{
+		cout << b[j]->makeSound(5) << endl;
+	} 
 	
 
 	cout << endl << "Testing checkPrey() function" << endl;
-		cout << "if it prints 3, the function works" << endl;
-		cout << "// 3 = full bank, impossible for this bank to cause Game Over" << endl;
-		cout << "Prints: " << A.checkPrey();
+	cout << "// 3 = full bank, impossible for this bank to cause Game Over" << endl;
+	cout << "expected_result = 3" << endl;
+	cout << "actual_result = " << A.checkPrey() << endl;
 	cout << endl;
 
 
 	//if all animals are in the array, returns true
 	cout << "Testing checkBank() function on full array" << endl;
-	cout << "if it prints true, the function works" << endl;
 	cout << "// true = full array; false = there is a null/empty element(s)" << endl;
+	cout << "expected_result = true" << endl;
 	if (A.checkBank() == true)
-		cout << "Prints: true" << endl << endl;
+		cout << "actual_result = true" << endl << endl;
 
 	//testing removing animals to the array
-	cout << "Testing removeAnimal() function - remove a dog" << endl;
+	cout << "Testing removeAnimal() function - removing a dog" << endl;
 	A.removeAnimal(puppy);
-	cout << "If this works, will print Cat and Mouse" << endl;
-	cout << "Prints: ";
+	cout << "expected_result = Cat and Mouse" << endl;
+	cout << "actual_result = ";
 	A.printBankStatus();
 
-	cout << endl << "Testing checkPrey() function" << endl;
-		cout << "if it prints 2, the function works" << endl;
-		cout << "// 2 = cat eats mouse" << endl;
-		cout << "Prints: " << A.checkPrey();
-
 	cout << endl << "Testing checkPrey() function on array with Cat and Mouse" << endl;
-	cout << "if it prints true, the function works" << endl;
+	cout << "// 1 = dog eats cat // 2 = cat eats mouse" << endl;
+	cout << "expected_result = 2" << endl;
+	cout << "actual_result = " << A.checkPrey() << endl;
+
+	cout << "// as a true/false case..." << endl;
+	cout << "expected_result = true" << endl;
 	if (A.checkPrey() == 2)
-		cout << "Prints: true" << endl << endl;
+		cout << "actual_result = true" << endl;
 
 	cout << endl << "Testing checkBank() function on partly full array" << endl;
-	cout << "if it prints false, the function works" << endl;
+	cout << "expected_result = false" << endl;
 	if (A.checkBank() == false)
-		cout << "Prints: false" << endl << endl;
+		cout << "actual_result = false" << endl << endl;
 
 	cout << "Testing checkIfExists() function on array with Cat and Mouse (searching for cat)" << endl;
-	cout << "purpose: ensure can 'collect' cat if cat DOES exist in this bank" << endl;
-	cout << "if it prints true, the function works" << endl;
+	cout << "// purpose: ensure can 'collect' cat if cat DOES exist in this bank" << endl;
+	cout << "expected_result = true" << endl;
 	if (A.checkIfExists(kitten) == true)
-		cout << "Prints: true" << endl << endl;
+		cout << "actual_result = true" << endl << endl;
 
 
 	cout << "Testing checkIfExists() function on array with Cat and Mouse (searching for dog)" << endl;
-	cout << "purpose: ensure can't 'collect' dog if dog isn't in this bank" << endl;
-	cout << "if it prints false, the function works" << endl;
+	cout << "// purpose: ensure can't 'collect' dog if dog isn't in this bank" << endl;
+	cout << "expected_result = false" << endl;
 	if (A.checkIfExists(puppy) == false)
-		cout << "Prints: false" << endl;
+		cout << "actual_result = false" << endl;
 
+	//********** Testing drawing sizes **********//
+
+		// unimplimented!!!
+
+	// cout << "Do you want to test the drawing animations" << endl << "CAUTION: Clears above tests!" << endl << "(y/n)" << endl;
+	// // set up for animations...
+	// char choice = 'a';
+	// A.addAnimal(puppy);
+
+	// // until the tester enters a valid choice, keep prompting
+	// while(choice != 'y' || choice != 'n')
+	// {
+	// 	cin >> choice;
+	// }
+
+	// if (choice == 'y')
+	// {
+	// 	//--comment out between here and...--
+	// 		system("clear");
+	// 		cout << "Unimplemented" << endl;
+	// 	//--here once test is implimented: Problem - mismatch on A???--
+		
+	// 	// play animations of all 3 animals
+	// 	for(int i = 0; i < 3; i++)
+	// 	{
+	// 		// draw 2 frames
+	// 		for(int j = 1; j <=2; j++)
+	// 		{
+	// 			system("clear");
+	// 			cout << "A " << A[i]->getSpecies() << endl << endl;
+	// 			A[i]->drawAnimal(j);
+	// 			pause(1);
+	// 		}
+	// 	}
+	// }
+
+	// else if(choice == 'n')
+	// {
+	// 	cout << "Drawing animation test skipped." << endl;
+	// }
+
+	
+	//********** termination **********//
 
 	//deleting memory allocated
 	delete kitten;
 	delete puppy;
 	delete stuart;
+	delete fakecat;
 
 	cout << endl << "==== ==== ==== ==== ====" << endl << "Program ends here" << endl << "==== ==== ==== ==== ====" << endl;
-
-
+	
+	return 0;
 }
 
