@@ -18,7 +18,7 @@ extern bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBan
 extern void pause(int dur);
 extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition);
 extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank);
-extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition);
+extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightBank, dog* blank);
 extern void boat(int location);
 extern void initialBoat();
@@ -95,7 +95,7 @@ int main(void)
 				}
 
 				//Check if it is a losing combination e.g. The cat and the mouse are together but the boat is on the otherside
-				if (checkIfLosingCombo(leftBank, rightBank, boatPosition) == true)
+				if (checkIfLosingCombo(leftBank, rightBank, puppy, kitten, boatPosition) == true)
 				{
 					clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
 					return 0;

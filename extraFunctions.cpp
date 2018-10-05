@@ -355,21 +355,53 @@ void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPositi
 //i.e. the dog and the cat are together and the boat is on the opposite riverbank
 
 
-bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, int* boatPosition)
+bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition)
 {
     // check if a game losing combination (ie gameover)
     if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
     {
+        for(int j = 1; j <=2; j++)
+        {
+            system("clear");
+            puppy->drawAnimal(j);
+            pause(1);
+        }
         cout << "You Lose! The dog ate the cat!" << endl;
+        pause(2);
         return true;
     }
     else if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
     {
+        for(int j = 1; j <=2; j++)
+        {
+            system("clear");
+            kitten->drawAnimal(j);
+            pause(1);
+        }
         cout << "You Lose! The cat ate the mouse!" << endl;
+        pause(2);
         return true;
     }
     else if ((leftBank->checkPrey() == 3 && *boatPosition == 1) || (rightBank->checkPrey() == 3 && *boatPosition == 0))
     {
+        for(int j = 1; j <=2; j++)
+        {
+            system("clear");
+            kitten->drawAnimal(j);
+            pause(1);
+        }
+        cout << "The cat ate the mouse!" << endl;
+        pause(1);
+
+        for(int j = 1; j <=2; j++)
+        {
+            system("clear");
+            puppy->drawAnimal(j);
+            pause(1);
+        }
+        cout << "The dog ate the cat!" << endl;
+        pause(1); 
+
         cout << "You Lose! The cat ate the mouse then the dog ate the cat!" << endl;
         return true;
     }
