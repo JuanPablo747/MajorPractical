@@ -172,46 +172,44 @@ int main(void)
 	if (A.checkIfExists(puppy) == false)
 		cout << "actual_result = false" << endl;
 
-	//********** Testing drawing sizes **********//
+	// ********** Testing drawing sizes **********//
 
-		// unimplimented!!!
+	cout << "Do you want to test the drawing animations" << endl << "CAUTION: Clears above tests!" << endl << "(y/n)" << endl;
+	// set up for animations...
+	char choice = 'a';
+	A.addAnimal(puppy);
 
-	// cout << "Do you want to test the drawing animations" << endl << "CAUTION: Clears above tests!" << endl << "(y/n)" << endl;
-	// // set up for animations...
-	// char choice = 'a';
-	// A.addAnimal(puppy);
+	// until the tester enters a valid choice, keep prompting
+	while(choice != 'y' && choice != 'n')
+	{
+		cin >> choice;
+	}
 
-	// // until the tester enters a valid choice, keep prompting
-	// while(choice != 'y' || choice != 'n')
-	// {
-	// 	cin >> choice;
-	// }
-
-	// if (choice == 'y')
-	// {
-	// 	//--comment out between here and...--
-	// 		system("clear");
-	// 		cout << "Unimplemented" << endl;
-	// 	//--here once test is implimented: Problem - mismatch on A???--
+	if (choice == 'y')
+	{
+		//--comment out between here and...--
+			system("clear");
+			cout << "Unimplemented" << endl;
+		//--here once test is implimented: Problem - mismatch on A???--
 		
-	// 	// play animations of all 3 animals
-	// 	for(int i = 0; i < 3; i++)
-	// 	{
-	// 		// draw 2 frames
-	// 		for(int j = 1; j <=2; j++)
-	// 		{
-	// 			system("clear");
-	// 			cout << "A " << A[i]->getSpecies() << endl << endl;
-	// 			A[i]->drawAnimal(j);
-	// 			pause(1);
-	// 		}
-	// 	}
-	// }
+		// // play animations of all 3 animals
+		// for(int i = 0; i < 3; i++)
+		// {
+		// 	// draw 2 frames
+		// 	for(int j = 1; j <=2; j++)
+		// 	{
+		// 		system("clear");
+		// 		cout << "A " << A[i]->getSpecies() << endl << endl;
+		// 		A[i]->drawAnimal(j);
+		// 		pause(1);
+		// 	}
+		// }
+	}
 
-	// else if(choice == 'n')
-	// {
-	// 	cout << "Drawing animation test skipped." << endl;
-	// }
+	else if(choice == 'n')
+	{
+		cout << "Drawing animation test skipped." << endl;
+	}
 
 	
 	//********** termination **********//
@@ -220,7 +218,7 @@ int main(void)
 	delete kitten;
 	delete puppy;
 	delete stuart;
-	delete fakecat;
+	delete fakecat;		// used during setter tests
 
 	cout << endl << "==== ==== ==== ==== ====" << endl << "Program ends here" << endl << "==== ==== ==== ==== ====" << endl;
 	
