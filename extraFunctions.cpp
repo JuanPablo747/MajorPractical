@@ -210,8 +210,9 @@ void initialBoat()
     cout  << "    /       ||     \\"<< endl;
     cout  << "   /        /       \\"<< endl;
     cout  << "  /________/         \\"<< endl;
-    cout  << "  ________/__________--/"<< endl;
-    cout  << "  \\___________________/"<< endl << endl;
+    cout  << "  ________/_________--/"<< endl;
+    cout  << "  \\                  /"<< endl;
+    cout  << "   \\________________/"<< endl << endl;
 }
 
 
@@ -232,15 +233,16 @@ void rightBoat()
     cout  << "                         /       ||     \\"<< endl;
     cout  << "                        /        /       \\"<< endl;
     cout  << "                       /________/         \\"<< endl;
-    cout  << "                       ________/__________--/"<< endl;
-    cout  << "                       \\___________________/"<< endl << endl;
+    cout  << "                       ________/_________--/"<< endl;
+    cout  << "                       \\                  /"<< endl;
+    cout  << "                        \\________________/"<< endl << endl;
 }
 
 
 //********** boat Function **********//
 //moving boat
 
-void boat(int location)
+void boat(int location, animal* adding)
 {
     string a;
     if(location == 1)
@@ -263,8 +265,18 @@ void boat(int location)
                 cout <<  a << "   /       ||     \\"<< endl;
                 cout <<  a << "  /        /       \\"<< endl;
                 cout <<  a << " /________/         \\"<< endl;
-                cout <<  a << " ________/__________--/"<< endl;
-                cout <<  a << " \\___________________/"<< endl << endl;
+                cout <<  a << " ________/_________--/"<< endl;
+                cout <<  a << " \\    ";
+                if(adding->getInitial() != 'b')
+                {
+                    cout << adding->makeSound(2) << "!";
+                }
+                else
+                {
+                    cout << "          ";
+                }
+                cout << "    /"<< endl;
+                cout <<  a << "  \\________________/"<< endl;
 
                 if(location == 1)
                     a = extend(a);
@@ -274,6 +286,7 @@ void boat(int location)
                 pause(1);
         }
 }
+
 
 
 //********** Print Bank Status **********//
@@ -382,29 +395,32 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, c
         pause(2);
         return true;
     }
-    else if ((leftBank->checkPrey() == 3 && *boatPosition == 1) || (rightBank->checkPrey() == 3 && *boatPosition == 0))
-    {
-        for(int j = 1; j <=2; j++)
-        {
-            system("clear");
-            kitten->drawAnimal(j);
-            pause(1);
-        }
-        cout << "The cat ate the mouse!" << endl;
-        pause(1);
 
-        for(int j = 1; j <=2; j++)
-        {
-            system("clear");
-            puppy->drawAnimal(j);
-            pause(1);
-        }
-        cout << "The dog ate the cat!" << endl;
-        pause(1); 
+    // tossed immediate pass = lose
 
-        cout << "You Lose! The cat ate the mouse then the dog ate the cat!" << endl;
-        return true;
-    }
+    // else if ((leftBank->checkPrey() == 3 && *boatPosition == 1) || (rightBank->checkPrey() == 3 && *boatPosition == 0))
+    // {
+    //     for(int j = 1; j <=2; j++)
+    //     {
+    //         system("clear");
+    //         kitten->drawAnimal(j);
+    //         pause(1);
+    //     }
+    //     cout << "The cat ate the mouse!" << endl;
+    //     pause(1);
+
+    //     for(int j = 1; j <=2; j++)
+    //     {
+    //         system("clear");
+    //         puppy->drawAnimal(j);
+    //         pause(1);
+    //     }
+    //     cout << "The dog ate the cat!" << endl;
+    //     pause(1); 
+
+    //     cout << "You Lose! The cat ate the mouse then the dog ate the cat!" << endl;
+    //     return true;
+    // }
     return false;
 }
 
