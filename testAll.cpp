@@ -187,23 +187,19 @@ int main(void)
 
 	if (choice == 'y')
 	{
-		//--comment out between here and...--
-			system("clear");
-			cout << "Unimplemented" << endl;
-		//--here once test is implimented: Problem - mismatch on A???--
-		
-		// // play animations of all 3 animals
-		// for(int i = 0; i < 3; i++)
-		// {
-		// 	// draw 2 frames
-		// 	for(int j = 1; j <=2; j++)
-		// 	{
-		// 		system("clear");
-		// 		cout << "A " << A[i]->getSpecies() << endl << endl;
-		// 		A[i]->drawAnimal(j);
-		// 		pause(1);
-		// 	}
-		// }
+		// play animations of all 3 animals
+		animal** arrayTest = A.returnArray();
+		for(int i = 0; i < 3; i++)
+		{
+			// draw 2 frames
+			for(int j = 1; j <=2; j++)
+			{
+				system("clear");
+				cout << "A " << arrayTest[i]->getSpecies() << endl << endl;
+				arrayTest[i]->drawAnimal(j);
+				pause(1);
+			}
+		}
 	}
 
 	else if(choice == 'n')
