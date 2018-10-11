@@ -6,11 +6,11 @@
 
 class animal
 {
-	//*States*						// protected,since child inherets from parent
+	//*States*						// protected, since child inherets from parent
 	protected:				
 		char initial;				// first letter of species name for easier input
 		std::string species; 		// whole species name (cat, dog, mouse)
-	//*Behaviours*
+	//*Behaviours*					// behaviours are public, since they allow the dev. to control states safely
 	public:					
 		//*Constructors*
 		animal();					// default constructor to allow creation of children classes
@@ -19,10 +19,12 @@ class animal
 		//*getters*
 		char getInitial();			// could use for searching what is stored at a pointer
 		std::string getSpecies();	// mainly used for displaying to player
-		virtual std::string makeSound(int repeats) = 0;	// pure virtual; therefore this class is abstract
+
+									// 2 pure virtual getters, therefore this class is abstract
+		virtual std::string makeSound(int repeats) = 0;
 		virtual void drawAnimal(int frame) = 0;
 
-		//*setters*					// we may not need these and could take them out later, but could be useful at least for testing, etc
+		//*setters*					// used to create 'blank' animal
 		void setInitial(char aInitial);
 		void setSpecies(std::string aSpecies);
 		
