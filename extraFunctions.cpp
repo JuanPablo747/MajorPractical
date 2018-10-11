@@ -245,6 +245,7 @@ void rightBoat()
 void boat(int location, animal* adding)
 {
     string a;
+    int counter = 1;
     if(location == 1)
         a = " ";
     else if (location == 0)
@@ -269,7 +270,14 @@ void boat(int location, animal* adding)
                 cout <<  a << " \\    ";
                 if(adding->getInitial() != 'b')
                 {
+                    if(counter%2 == 0)
+                    {
                     cout << adding->makeSound(2) << "!";
+                    }
+                    else 
+                    {
+                        cout << "          ";
+                    }
                 }
                 else
                 {
@@ -282,7 +290,7 @@ void boat(int location, animal* adding)
                     a = extend(a);
                 if(location == 0)
                     a = remove(a);
-
+                counter++;
                 pause(1);
         }
 }

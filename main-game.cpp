@@ -74,7 +74,7 @@ int main(void)
 		printBankStatus(leftBank, rightBank, boatPosition);
 
 		// give user a chance for input
-		cout << "Which animal do you want to move? Type pass to just move the boat: ";
+		cout << "Which animal do you want to move? Type 'pass' to just move the boat: ";
 
 		// while an invalid input
 		while(returnID(playerInput) == 99)
