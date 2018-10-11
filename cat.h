@@ -8,7 +8,7 @@
 class cat : public animal
 {
 	//*States*				// private, since each species of animal doesn't have a subclass
-	std::string eats;		// animal the cat eats.
+	std::string eats;		// animal the cat eats
 	//*Behaviours*
 	public:					
 		//*Constructors*
@@ -16,7 +16,7 @@ class cat : public animal
 
 		//*getters*
 		std::string makeSound(int repeats);	// make a cat sound with number of repeats
-		void drawAnimal(int frame);
+		void drawAnimal(int frame);			// draw the cat, an integer represents which 'picture' to draw
 		
 		//*setters*
 		
