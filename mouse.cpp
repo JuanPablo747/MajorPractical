@@ -7,17 +7,25 @@ using namespace std;
 
 // ------ // constructors & destructors // ------ //
 
-mouse::mouse() : animal(){
+mouse::mouse() : animal()
+{
 	initial = 'm';
 	species = "Mouse";
+
 }
 
-mouse::~mouse(){};
+mouse::~mouse()
+{
+	// nothing to be added
+};
 
 // ------ // ------ // getters // ------ // ------ //
 
-string mouse::makeSound(int repeats){
+string mouse::makeSound(int repeats)
+{
+	// initialize output - will give no string for 0 repeats
 	string squeak = "";
+	// extend squeak string with animal's sound once per repeat
 	for(int i = 0; i < repeats; i++)
 	{
 		squeak = squeak + "Skrr";
@@ -30,8 +38,9 @@ string mouse::makeSound(int repeats){
 	return squeak;
 }
 
-void mouse::drawAnimal(int frame){
-	if(frame == 1)
+void mouse::drawAnimal(int frame)
+{
+	if(frame == 1)					// if frame 1, draw animal
 	{
 		cout << "                    ___" << endl;
 		cout << "           _  _  .-'   '-." << endl;
@@ -40,7 +49,7 @@ void mouse::drawAnimal(int frame){
 		cout << "          o_\\\\-mm-......-mm`~~~~~~~~~' " << endl;
 	}
 
-	else if (frame == 2)
+	else if (frame == 2)			// if frame 2, draw animal + print its sound
 	{
 		cout << "                    ___" << endl;
 		cout << "           _  _  .-'   '-." << endl;
