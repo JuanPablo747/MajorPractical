@@ -16,13 +16,16 @@ cat::cat() : animal()
 
 cat::~cat()
 {
-	// leave blank for now
+	// nothing to be added
 }
 
 // ------ // ------ // getters // ------ // ------ //
 
-string cat::makeSound(int repeats){
+string cat::makeSound(int repeats)
+{
+	// initialize output - will give no string for 0 repeats
 	string cry = "";
+	// extend cry string with animal's sound once per repeat
 	for(int i = 0; i < repeats; i++)
 	{
 		cry = cry + "Meow";
@@ -35,8 +38,9 @@ string cat::makeSound(int repeats){
 	return cry;
 }
 
-void cat::drawAnimal(int frame){
-	if(frame == 1)
+void cat::drawAnimal(int frame)
+{
+	if(frame == 1)					// if frame 1, draw animal
 	{
 		cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
 		cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
@@ -48,7 +52,7 @@ void cat::drawAnimal(int frame){
 		cout << "        ┗┛┗┛  ┗┛┗┛" << endl;
 	}
 	
-	else if (frame == 2)
+	else if (frame == 2)			// if frame 2, draw animal + print its sound
 	{
 		cout << "      ╱╲    ╱╲  ╭━╮" << endl; 
 		cout << "     ╱╱╲╲__╱╱╲╲ ╰╮┃" << endl;
