@@ -16,7 +16,6 @@ using namespace std;
 void pause(int dur)
 {
     int temp = time(NULL) + dur;
-    
     while(temp > time(NULL));
 }
 
@@ -25,12 +24,13 @@ void pause(int dur)
 void start()
 {
     string dots = ".";
+    // run 3 frames of 'loading animation'
     for (int i = 0; i < 3; i++)
     {
-    system("clear");
-    cout << "Game starting" << dots << endl << endl;
-    dots.append(".");
-    pause(1);
+        system("clear");
+        cout << "Game starting" << dots << endl << endl;
+        dots.append(".");
+        pause(1);
     }
 }
 
@@ -41,25 +41,28 @@ void start()
 void intro()
 {
     system("clear");
+    // print introduction & rules to game.
     cout << "Welcome to the Riverbank Riddle" << endl << endl;
-
     cout << "The Riddle:" << endl; 
     cout << "A man has to take a dog, a cat, and a mouse across a river. He can only take one of the animals across at a time. If he takes the mouse, the dog will eat the cat. If he takes the dog, the cat will eat the mouse." << endl << endl << endl;
-
-    cout << "continue: (y/n)" << endl;
-    char answer2 = 'g';
-    while(answer2 != 'y')
+    
+    // ask the player if they want to play the game?
+    cout << "Continue: (y/n)" << endl;
+    char beginGameInput = 'g';
+    // as long as the player hasn't answered
+    while(beginGameInput != 'y' || beginGameInput != 'n')
     {
-        if (answer2 == 'y'){
+        if (beginGameInput == 'y')
             break;
-        }
-        else if (answer2 == 'n'){
+
+        if (beginGameInput == 'n')
+        {
             cout << "too bad - you're playing!" << endl;
             pause(3);
-            answer2= 'y';
+            beginGameInput= 'y';
             break;
         }
-    cin >> answer2;
+    cin >> beginGameInput;
     }
 
     system("clear");
@@ -71,24 +74,22 @@ void intro()
 
 //********** return ID Function **********//
 
-
-
-//this function will take in a string (which was originally gotten from the user) and return an integer. If the string is any
-//variation of dog e.g. (dog, Dog, dOg, DOG, doG) it will return 1, same with cat but 2, mouse 3 and pass 4. If it doesnt satisfy any
-//of these then it will return 99
+// this function will take a user's input string and return an integer.
+    // will accept any casing
+    // 1 = dog; 2 = cat; 3 = mouse; 4 = successful_pass; 99 = failed_entry
 int returnID(string word)
 {
-    //lenght of the word that was passed in
+    // length of the word that was passed in
     int len = word.length();
-    //Number of animals (always 4)
+    // Number of 'valid words' (pass is counted as an animal here)
     const int noOfAnimals = 4;
-    //string of the possible animals
+    // string of all 'valid words'
     string animals[noOfAnimals] = {"dog", "cat", "mouse", "pass"};
-    //different counters needed
+    // different counters needed
     int counter;
     int animalID = 1;
 
-    //This will iterate over every word in the animals[] array
+    // iterate over every word in the animals[] array
     for (int k = 0; k < noOfAnimals; k++)
     {
         counter = 0;
@@ -104,22 +105,25 @@ int returnID(string word)
                 {
                     word[i] = tolower(word[i]);
                 }
-                // if any character in the word passed in does not match the character in the word of the animals array
-                //counter is increased by 1
+
+                // if any character in the word passed in does not match the character in the word of the animals array, then the counter increases by 1
                 if (word[i] != animals[k][i])
                 {
                     counter++;
                 }
             }
+
             // if the word matches the word that is in the array, return animalID
             if (counter == 0)
             {
                 return animalID;
             }
         }
+
         // animalID + 1 as we are moving onto the next animal in the array
         animalID++;
     }
+    // if input doesn't match any valid word, return 99
     return 99;
 }
 
@@ -127,26 +131,25 @@ int returnID(string word)
 
 //********** moveAnimal Function **********//
 
-
-
 // function to move boat from 1 bank to another and move an animal (if any)
 bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding)
 {
     for(int i = 1; i <= 4; i++)
     {
-        //if a valid animal/pass...
+        //if a valid word...
         if(returnID(playerInput) == i)
         {
-            //if is on left move those animals
+            // if is on left move those animals
             if (*boatPosition == 0)
             {
                 // and if the animal entered is NOT on this bank AND didn't enter a pass...
                 if(i != 4 && leftBank->checkIfExists(adding) == false)
                 {
-                    cout << "The " << adding->getSpecies() << " is on the other bank." << endl;        // the comment is in the above window and gets cleared - got to fix where clear takes place
+                    cout << "The " << adding->getSpecies() << " is on the other bank." << endl;
                     pause(2);
                     return false;
                 }
+
                 // if animal entered is on this bank AND not giving a pass
                 if (i != 4)
                 {
@@ -158,22 +161,25 @@ bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, rive
                  *boatPosition = 1;
                  return true;
             }
-            // else is on right...
+
+            // else, the boat must be on right bank...
             else if (*boatPosition == 1)
             {
                 // and if the animal entered is NOT on this bank AND didn't enter a pass...
                 if(i != 4 && rightBank->checkIfExists(adding) == false)
                 {
-                    cout << "The " << adding->getSpecies() << " is on the other bank." << endl;        // the comment is in the above window and gets clear - got to fix where clear takes place
+                    cout << "The " << adding->getSpecies() << " is on the other bank." << endl;
                     pause(2);
                     return false;
                 }
+
                 // if animal entered is on this bank AND not giving a pass
                 if (i != 4)
                 {
                     leftBank->addAnimal(adding);
                     rightBank->removeAnimal(adding);
                 }
+
                 // as long as any valid input was given, move the boat to the other side.
                 *boatPosition = 0;
                 return true;
@@ -183,13 +189,15 @@ bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, rive
     return false;
 }
 
-//extra functions used to move the boat
+//********** All Boat Functions **********//
+
+// increase distance from left side of screen
 string extend(string a)
 {
     a.append("       ");
     return a;
 }
-
+// decrease distance from left side of screen
 string remove(string a)
 {
     a.erase(1, 7);
@@ -197,8 +205,7 @@ string remove(string a)
 }
 
 
-//********** initial Boat Function **********//
-
+// boat docked on left bank drawing
 void initialBoat()
 {
     cout << "     Left Riverbank       Right Riverbank" << endl << endl;
@@ -218,9 +225,7 @@ void initialBoat()
     cout  << "   \\________________/"<< endl << endl;
 }
 
-
-//********** right Boat Function **********//
-//used when *boatPosition == 1
+// boat docked on right bank drawing; used when *boatPosition == 1
 
 void rightBoat()
 {
@@ -242,60 +247,66 @@ void rightBoat()
 }
 
 
-//********** boat Function **********//
-//moving boat
+// moving boat drawing; includes drawing animal sound of the animal currently in boat (ie adding)
 
 void boat(int location, animal* adding)
 {
-    string a;
-    int counter = 1;
+    string a;               // spacing variable (distance from left)
+    int frameCounter = 1;        // counter so that every second frame makes sound, not every frame
+
+    // depending on side the boat starts on, set the appropriate spacing variable
     if(location == 1)
         a = " ";
     else if (location == 0)
         a = "                      ";
 
-        for(int i = 0; i < 4; i ++)
+    // for 4 frames...
+    for(int i = 0; i < 4; i ++)
+    {
+        // clear ready for new frame
+        system("clear");
+        // draw the start of the boat
+        cout << "     Left Riverbank       Right Riverbank" << endl << endl;
+        cout <<  a << "           |"<< endl;
+        cout <<  a << "          /|        "<< endl;
+        cout <<  a << "         / |\\"<< endl;
+        cout <<  a << "        /  | \\"<< endl;
+        cout <<  a << "       /   || \\"<< endl;
+        cout <<  a << "      /    | | \\"<< endl;
+        cout <<  a << "     /     | |  \\"<< endl;
+        cout <<  a << "    /      | |   \\"<< endl;
+        cout <<  a << "   /       ||     \\"<< endl;
+        cout <<  a << "  /        /       \\"<< endl;
+        cout <<  a << " /________/         \\"<< endl;
+        cout <<  a << " ________/_________--/"<< endl;
+        cout <<  a << " \\    ";
+        // if animal inside the boat isn't the blank/pass, then print the animal sound every 2 frames
+        if(adding->getInitial() != 'b')
         {
-                system("clear");
-                cout << "     Left Riverbank       Right Riverbank" << endl << endl;
-                cout <<  a << "           |"<< endl;
-                cout <<  a << "          /|        "<< endl;
-                cout <<  a << "         / |\\"<< endl;
-                cout <<  a << "        /  | \\"<< endl;
-                cout <<  a << "       /   || \\"<< endl;
-                cout <<  a << "      /    | | \\"<< endl;
-                cout <<  a << "     /     | |  \\"<< endl;
-                cout <<  a << "    /      | |   \\"<< endl;
-                cout <<  a << "   /       ||     \\"<< endl;
-                cout <<  a << "  /        /       \\"<< endl;
-                cout <<  a << " /________/         \\"<< endl;
-                cout <<  a << " ________/_________--/"<< endl;
-                cout <<  a << " \\    ";
-                if(adding->getInitial() != 'b')
-                {
-                    if(counter%2 == 0)
-                    {
-                    cout << adding->makeSound(2) << "!";
-                    }
-                    else 
-                    {
-                        cout << "          ";
-                    }
-                }
-                else
-                {
-                    cout << "          ";
-                }
-                cout << "    /"<< endl;
-                cout <<  a << "  \\________________/"<< endl;
-
-                if(location == 1)
-                    a = extend(a);
-                if(location == 0)
-                    a = remove(a);
-                counter++;
-                pause(1);
+            if(frameCounter%2 == 0)
+                cout << adding->makeSound(2) << "!";
+            else 
+                cout << "          ";
         }
+
+        // else the boat is on a pass run (containing blank), then just use normal boat interior
+        else
+            cout << "          ";
+
+        // regardless of above, finish drawing boat
+        cout << "    /"<< endl;
+        cout <<  a << "  \\________________/"<< endl;
+
+        // depending on what direction the boat is moving, adjust the spacing variable
+        if(location == 1)
+            a = extend(a);
+        if(location == 0)
+            a = remove(a);
+
+        // before moving onto next 'frame' increase the frameCounter & pause
+        frameCounter++;
+        pause(1);
+    }
 }
 
 
@@ -304,74 +315,63 @@ void boat(int location, animal* adding)
 
 void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition)
 {
-    // print game status
-     //print boat
+    // draw the boat on the appropriate bank
     if(*boatPosition == 0)
         initialBoat();
     else if (*boatPosition == 1)
         rightBoat();
 
-// print left bank info
-    if (leftBank->countAnimals() == 1)
-        cout << "There is " << leftBank->countAnimals() << " animal ";
-    else
-        cout << "There are " << leftBank->countAnimals() << " animals ";; 
-
-    cout << "on the Left Bank." << endl;
-    // if there is at least 1 animal on the bank...
-    if(leftBank->countAnimals() != 0)
-    {
-        // if there is exactly 1 animal...
-        if(leftBank->countAnimals() == 1)
-        {
-            cout << "It is the ";
-        }
-        // if there are 1+ animals...
+    // print left bank info
+        if (leftBank->countAnimals() == 1)
+            cout << "There is " << leftBank->countAnimals() << " animal ";
         else
+            cout << "There are " << leftBank->countAnimals() << " animals ";; 
+
+        cout << "on the Left Bank." << endl;
+        // if there is at least 1 animal on the bank...
+        if(leftBank->countAnimals() != 0)
         {
-            cout << "They are the ";
+            // if there is exactly 1 animal...
+            if(leftBank->countAnimals() == 1)
+            {
+                cout << "It is the ";
+            }
+            // if there are 1+ animals...
+            else
+            {
+                cout << "They are the ";
+            }
+            // regardless, list the animal(s)
+            leftBank->printBankStatus();
         }
-        // regardless, list the animal(s)
-        leftBank->printBankStatus();
-    }
-    cout << endl;
+        cout << endl;
 
-// print left bank info
-    if (rightBank->countAnimals() == 1)
-        cout << "There is " << rightBank->countAnimals() << " animal ";
-    else
-        cout << "There are " << rightBank->countAnimals() << " animals ";; 
-
-    cout << "on the Right Bank." << endl;
-
-    // if there is at least 1 animal on the bank...
-    if(rightBank->countAnimals() != 0)
-    {
-        // if there is exactly 1 animal...
-        if(rightBank->countAnimals() == 1)
-        {
-            cout << "It is the ";
-        }
-        // if there are 1+ animals...
+    // print left bank info
+        if (rightBank->countAnimals() == 1)
+            cout << "There is " << rightBank->countAnimals() << " animal ";
         else
+            cout << "There are " << rightBank->countAnimals() << " animals ";; 
+
+        cout << "on the Right Bank." << endl;
+
+        // if there is at least 1 animal on the bank...
+        if(rightBank->countAnimals() != 0)
         {
-            cout << "They are the ";
+            // if there is exactly 1 animal...
+            if(rightBank->countAnimals() == 1)
+            {
+                cout << "It is the ";
+            }
+            // if there are 1+ animals...
+            else
+            {
+                cout << "They are the ";
+            }
+            // regardless, list the animal(s)
+            rightBank->printBankStatus();
         }
-        // regardless, list the animal(s)
-        rightBank->printBankStatus();
-    }
-    cout << endl;
-//Deleted as we now have to boat animation
-// // print/draw boat info
-//     cout << "The boat is currently on the ";
-//     if(*boatPosition == 0)
-//     {
-//         cout << "Left Bank." << endl;
-//     }
-//     else
-//     {
-//         cout << "Right Bank." << endl;
-//     }
+        cout << endl;
+
 }
 
 
@@ -381,19 +381,22 @@ void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPositi
 
 bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition)
 {
-    // check if a game losing combination (ie gameover)
+    // check if a game losing combination two animals on the OPPOSITE bank than the player would eat each other AND those 2 animals are the cat+dog (returns 1 from checkPrey)
     if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
     {
+        // draw 2 frames of the dog animation
         for(int j = 1; j <=2; j++)
         {
             system("clear");
             puppy->drawAnimal(j);
             pause(1);
         }
+        // print game over message
         cout << "You Lose! The dog ate the cat!" << endl;
         pause(2);
         return true;
     }
+
     else if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
     {
         for(int j = 1; j <=2; j++)
@@ -402,12 +405,13 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, c
             kitten->drawAnimal(j);
             pause(1);
         }
+        // print game over message
         cout << "You Lose! The cat ate the mouse!" << endl;
         pause(2);
         return true;
     }
 
-    // tossed immediate pass = lose
+    // // tossed immediate pass = lose
 
     // else if ((leftBank->checkPrey() == 3 && *boatPosition == 1) || (rightBank->checkPrey() == 3 && *boatPosition == 0))
     // {
@@ -432,13 +436,15 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, c
     //     cout << "You Lose! The cat ate the mouse then the dog ate the cat!" << endl;
     //     return true;
     // }
+
+    // otherwise, this is not a gameOver and return false
     return false;
 }
 
 //********** Animal to Add Function **********//
 
 
-//basically uses the input from the player and returns the animal it corresponds to
+// basically uses the input from the player and returns the animal it corresponds to
 animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank)
 {
     if(returnID(playerInput) == 1)
@@ -485,7 +491,7 @@ void endGame(animal** riverbank)
 
 //********** TERMINATION **********//
 
-//deleting memory allocated
+// deleting memory allocated
 void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightBank, dog* blank)
 {
     delete kitten;
