@@ -34,10 +34,8 @@ string animal::getSpecies()
 	return species;
 }
 
-// string animal::makeSound(int repeats){
-// 	// even if virtual, still needs to be defined. But can leave empty
-// 	//return "generic animal sound";
-// }	// changed to pure virtual; don't define here anymore
+// // makeSound is pure virtual
+// string animal::makeSound(int repeats){}
 
 // ------ // ------ // setters // ------ // ------ //
 
