@@ -57,11 +57,11 @@ int main(void)
 
 //********** PLAY THE GAME **********//
 
-	//clearing the screen and starting the game
+	// clearing the screen and starting the game; draw set up and rules
 	start();
 	intro();
 
-	//Game will run until there are 3 animals in the right riverbank, every time it runs it is a 'turn'
+	// Game will run until there are 3 animals in the right riverbank; each run of this while loop is a 'turn'
 	while(rightBank->checkBank() == false)
 	{
 		//clears the screen 
@@ -70,38 +70,43 @@ int main(void)
 		// at the beginning of each "turn", reset the playerInput (prevent looping an animal)
 		playerInput = "null";
 
-		// print game status
+		// print game status - what animals are on each bank + where the boat is
 		printBankStatus(leftBank, rightBank, boatPosition);
 
 		// give user a chance for input
 		cout << "Which animal do you want to move? Type 'pass' to just move the boat: ";
 
-		// while an invalid input
+		// while the input is invalid, keep trying to get input
 		while(returnID(playerInput) == 99)
 		{	
-			//geting input from the user
+			// get input from the user
 			cin >> playerInput;
 
-			//if the player has given a valid input, proceed
+			// if the player has given a valid input...
 			if(returnID(playerInput) != 99)
 			{
-				//get which animal is going to be moved and store it in adding
+				// based on player input, store player choice as adding for it to be moved
 				adding = animalToAdd(playerInput, puppy, kitten, stuart, blank);
 
-				//perform the move from one bank to the next
+				// if moving animal is possible, do it, then draw the boat animation -- SLOPPY CODE: action to change shouldn't be in booleon test
 				if (moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding) == true)
 				{
+					// -- insert 'moveAnimal' function -- // -- existing 'moveAnimal' should be 'checkIfMoveIsValid' -- //
 					boat(*boatPosition, adding); //play the boat animation
 				}
 
-				//Check if it is a losing combination e.g. The cat and the mouse are together but the boat is on the otherside
+				// Check if action just done results in a game over; e.g. The cat and the mouse are together but the boat is on the otherside -- SLOPPY CODE: action to change shouldn't be in booleon test
 				if (checkIfLosingCombo(leftBank, rightBank, puppy, kitten, boatPosition) == true)
 				{
+					// -- insert 'runLosingCombo' function -- //
+					// clear memory & break out of game
 					clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
+					cout << endl << "Game closing..." << endl;
 					return 0;
 				}	
 			}
-			//else if still invalid after input, display message.
+
+			// else if still invalid after input, display message.
 			else
 			{
 				cout << playerInput << " is an invalid input. Try again." << endl;
@@ -111,9 +116,8 @@ int main(void)
 		}
 	}
 
-	endGame(rightBank->returnArray()); // ending game with animations
-
-	//game closing
+	// ending game with animations
+	endGame(rightBank->returnArray()); 
 	cout << endl << "Game closing..." << endl;
 
 
