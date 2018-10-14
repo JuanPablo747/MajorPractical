@@ -14,7 +14,7 @@
 using namespace std;
 
 extern int returnID(string word);
-extern void moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern void checkIfMoveIsValid(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
 
 int main(void)
