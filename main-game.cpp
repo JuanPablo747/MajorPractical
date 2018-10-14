@@ -14,11 +14,14 @@ using namespace std;
 
 extern void start();
 extern int returnID(string word);
-extern bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern bool checkIfMoveIsValid(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern void moveAnimalSuccess(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
+extern void moveAnimalFail(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
 extern void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPosition);
 extern animal* animalToAdd(string playerInput, animal* puppy, animal* kitten, animal* stuart, animal* blank);
 extern bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition);
+extern void runLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition);
 extern void clearMemory(cat* kitten, dog* puppy, mouse* stuart, int* boatPosition, riverbank* leftBank, riverbank* rightBank, dog* blank);
 extern void boat(int location, animal* adding);
 extern void initialBoat();
@@ -88,17 +91,20 @@ int main(void)
 				// based on player input, store player choice as adding for it to be moved
 				adding = animalToAdd(playerInput, puppy, kitten, stuart, blank);
 
-				// if moving animal is possible, do it, then draw the boat animation -- SLOPPY CODE: action to change shouldn't be in booleon test
-				if (moveAnimal(playerInput, boatPosition, leftBank, rightBank, adding) == true)
+				// if moving animal is possible, do it, then draw the boat animation
+				if (checkIfMoveIsValid(playerInput, boatPosition, leftBank, rightBank, adding) == true)
 				{
-					// -- insert 'moveAnimal' function -- // -- existing 'moveAnimal' should be 'checkIfMoveIsValid' -- //
+					moveAnimalSuccess(playerInput, boatPosition, leftBank, rightBank, adding);
 					boat(*boatPosition, adding); //play the boat animation
 				}
+				// if not possible, explain why...
+				else
+					moveAnimalFail(playerInput, boatPosition, leftBank, rightBank, adding);// -- insert 'moveAnimal' function -- // -- existing 'moveAnimal' should be 'checkIfMoveIsValid' -- //
 
-				// Check if action just done results in a game over; e.g. The cat and the mouse are together but the boat is on the otherside -- SLOPPY CODE: action to change shouldn't be in booleon test
+				// Check if action just done results in a game over; e.g. The cat and the mouse are together but the boat is on the otherside
 				if (checkIfLosingCombo(leftBank, rightBank, puppy, kitten, boatPosition) == true)
 				{
-					// -- insert 'runLosingCombo' function -- //
+					runLosingCombo(leftBank, rightBank, puppy, kitten, boatPosition);
 					// clear memory & break out of game
 					clearMemory(kitten, puppy, stuart, boatPosition, leftBank, rightBank, blank);
 					cout << endl << "Game closing..." << endl;
