@@ -129,11 +129,38 @@ int returnID(string word)
 
 
 
-//********** moveAnimal Function **********//
+//********** Move Animal Functions **********//
 
 // function to move boat from 1 bank to another and move an animal (if any)
-bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding)
+bool checkIfMoveIsValid(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding)
 {
+    // 4 runs, since for valid words (cat, dog, mouse, pass)...
+    for(int i = 1; i <= 4; i++)
+    {
+        // if a valid word...
+        if(returnID(playerInput) == i)
+        {
+            // pass is always a legal move...
+            if(i == 4)
+                return true;
+
+            // else, if not a pass, if is boat is on the left AND the animal entered is on the left bank, then return true
+            else if (*boatPosition == 0 && leftBank->checkIfExists(adding) == true)
+                return true;
+
+            // else, do the same test for right bank
+            else if (*boatPosition == 1 && rightBank->checkIfExists(adding) == true)
+                return true;
+        }
+    }
+
+    // any other possibility, declare move as illigal
+    return false;
+}
+
+void moveAnimalSuccess(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding)
+{
+    // 4 runs, since for valid words for this case (cat, dog, mouse, pass)...
     for(int i = 1; i <= 4; i++)
     {
         //if a valid word...
@@ -142,51 +169,57 @@ bool moveAnimal(string playerInput, int* boatPosition, riverbank* leftBank, rive
             // if is on left move those animals
             if (*boatPosition == 0)
             {
-                // and if the animal entered is NOT on this bank AND didn't enter a pass...
-                if(i != 4 && leftBank->checkIfExists(adding) == false)
-                {
-                    cout << "The " << adding->getSpecies() << " is on the other bank." << endl;
-                    pause(2);
-                    return false;
-                }
-
-                // if animal entered is on this bank AND not giving a pass
-                if (i != 4)
+                // if entered cat/dog/mouse, swap the bank the animal is on...
+                if(i != 4 && leftBank->checkIfExists(adding) == true)
                 {
                     leftBank->removeAnimal(adding);
                     rightBank->addAnimal(adding);
-                    
                 }
-                // as long as any valid input was given, move the boat to the other side.
+
+                // then, as long as any valid input (inc. pass) was given, move the boat to the other side.
                  *boatPosition = 1;
-                 return true;
             }
 
             // else, the boat must be on right bank...
             else if (*boatPosition == 1)
             {
-                // and if the animal entered is NOT on this bank AND didn't enter a pass...
-                if(i != 4 && rightBank->checkIfExists(adding) == false)
-                {
-                    cout << "The " << adding->getSpecies() << " is on the other bank." << endl;
-                    pause(2);
-                    return false;
-                }
-
-                // if animal entered is on this bank AND not giving a pass
-                if (i != 4)
+                // if entered cat/dog/mouse, swap the bank the animal is on...
+                if(i != 4 && rightBank->checkIfExists(adding) == true)
                 {
                     leftBank->addAnimal(adding);
                     rightBank->removeAnimal(adding);
                 }
 
-                // as long as any valid input was given, move the boat to the other side.
+                // then, as long as any valid input (inc. pass) was given, move the boat to the other side.
                 *boatPosition = 0;
-                return true;
             }
         }
     }
-    return false;
+}
+
+void moveAnimalFail(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding)
+{
+    // 3 runs, since for valid words for this case (cat, dog, mouse)...
+    for(int i = 1; i <= 3; i++)
+    {
+        //if a valid word...
+        if(returnID(playerInput) == i)
+        {
+            // if is on left move those animals
+            if (*boatPosition == 0 && leftBank->checkIfExists(adding) == false)
+            {
+                cout << "The " << adding->getSpecies() << " is on the other bank." << endl;
+                pause(2);
+            }
+
+            // else, the boat must be on right bank...
+            else if (*boatPosition == 1 && rightBank->checkIfExists(adding) == false)
+            {
+                cout << "The " << adding->getSpecies() << " is on the other bank." << endl;
+                pause(2);
+            }
+        }
+    }
 }
 
 //********** All Boat Functions **********//
@@ -378,10 +411,23 @@ void printBankStatus(riverbank* leftBank, riverbank* rightBank, int * boatPositi
 //********** check if there is a losing combination Function **********//
 //i.e. the dog and the cat are together and the boat is on the opposite riverbank
 
-
+// check if a game losing combination two animals on the OPPOSITE bank than the player would eat each other
 bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition)
 {
-    // check if a game losing combination two animals on the OPPOSITE bank than the player would eat each other AND those 2 animals are the cat+dog (returns 1 from checkPrey)
+    // if those 2 animals on opposite bank are cat+dog (returns 1 from checkPrey)
+    if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
+        return true;
+
+    // else if those 2 animals on opposite bank are cat+dog (returns 1 from checkPrey)
+    else if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
+        return true;
+
+    // otherwise, this is not a gameOver and return false
+    return false;
+}
+
+void runLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, cat* kitten, int* boatPosition)
+{
     if ((leftBank->checkPrey() == 1 && *boatPosition == 1) || (rightBank->checkPrey() == 1 && *boatPosition == 0))
     {
         // draw 2 frames of the dog animation
@@ -394,7 +440,6 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, c
         // print game over message
         cout << "You Lose! The dog ate the cat!" << endl;
         pause(2);
-        return true;
     }
 
     else if ((leftBank->checkPrey() == 2 && *boatPosition == 1) || (rightBank->checkPrey() == 2 && *boatPosition == 0))
@@ -408,7 +453,6 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, c
         // print game over message
         cout << "You Lose! The cat ate the mouse!" << endl;
         pause(2);
-        return true;
     }
 
     // // tossed immediate pass = lose
@@ -436,9 +480,6 @@ bool checkIfLosingCombo(riverbank* leftBank, riverbank* rightBank, dog* puppy, c
     //     cout << "You Lose! The cat ate the mouse then the dog ate the cat!" << endl;
     //     return true;
     // }
-
-    // otherwise, this is not a gameOver and return false
-    return false;
 }
 
 //********** Animal to Add Function **********//
