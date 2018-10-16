@@ -1,21 +1,28 @@
 // Use this to complile tests
 // g++ -o testAll testAll.cpp animal.cpp cat.cpp dog.cpp mouse.cpp riverbank-array-two.cpp extraFunctions.cpp
 
+//********** NAMESPACE & INCLUDE FILES **********//
+
+using namespace std;
+
 #include <iostream>
 #include <string>
 #include <cstdlib>
-
 #include "animal.h"
 #include "dog.h"
 #include "cat.h"
 #include "mouse.h"
 #include "riverbank-array-two.h"
 
-using namespace std;
-
 extern int returnID(string word);
 extern void checkIfMoveIsValid(string playerInput, int* boatPosition, riverbank* leftBank, riverbank* rightBank, animal* adding);
 extern void pause(int dur);
+
+extern void boat(int location, animal* adding);
+extern void initialBoat();
+extern void rightBoat();
+
+//********** MAIN PROGRAM **********//
 
 int main(void)
 {
@@ -200,6 +207,12 @@ int main(void)
 				pause(1);
 			}
 		}
+
+		// play a boat loop
+		initialBoat();
+		boat(0, kitten);
+		rightBoat();
+		boat(1, kitten);
 	}
 
 	else if(choice == 'n')
