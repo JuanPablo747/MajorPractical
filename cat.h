@@ -7,8 +7,8 @@
 
 class cat : public animal
 {
-	//*States*				// private, since each species of animal doesn't have a subclass
-	std::string eats;		// animal the cat eats
+	//*States*								// private, since each species of animal doesn't have a subclass
+	std::string eats;						// animal the cat eats
 	//*Behaviours*
 	public:					
 		//*Constructors*
