@@ -1,0 +1,98 @@
+bash-4.2$ g++ -std=c++11 -o program TicketBooker.cpp
+bash-4.2$ ./program input.txt
+==== sorted input ====
+a2 0 2 0 30 0 0 0 0 0
+a1 0 3 0 20 0 0 0 0 0
+a5 0 3 0 20 0 0 0 0 0
+a0 0 4 0 10 0 0 0 0 0
+a3 0 7 0 30 0 0 0 0 0
+a4 100 1 0 15 0 0 0 0 0
+a6 100 2 0 20 0 0 0 0 0
+==== ============ ====
+==== time=0 ====
+a2 has been placed into Q1_2 and removed from new_arrivals.
+a1 has been placed into Q1_3 and removed from new_arrivals.
+a5 has been placed into Q1_3 and removed from new_arrivals.
+a0 has been placed into Q2 and removed from new_arrivals.
+a3 has been placed into Q2 and removed from new_arrivals.
+this cycle we serve Q1_2.
+Q1 (priority 2):
+a2 
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=60 ====
+this cycle we serve Q1_2.
+Q1 (priority 2):
+a2 
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=120 ====
+a4 has been placed into Q1_1 and removed from new_arrivals.
+a6 has been placed into Q1_2 and removed from new_arrivals.
+this cycle we serve Q1_1.
+Q1 (priority 1):
+a4 
+Q1 (priority 2):
+a2 a6 
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=190 ====
+this cycle we serve Q1_1.
+Q1 (priority 2):
+a2 a6 
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=260 ====
+this cycle we serve Q1_2.
+Q1 (priority 2):
+a6 
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=320 ====
+this cycle we serve Q1_2.
+Q1 (priority 2):
+a6 
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=380 ====
+this cycle we serve Q1_2.
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=440 ====
+this cycle we serve Q1_3.
+Q1 (priority 3):
+a1 a5 
+Q2:
+a0 a3 
+==== time=490 ====
+this cycle we serve Q1_3.
+Q1 (priority 3):
+a5 
+Q2:
+a0 a3 
+==== time=540 ====
+this cycle we serve Q1_3.
+Q1 (priority 3):
+a5 
+Q2:
+a0 a3 
+==== time=590 ====
+this cycle we serve Q1_3.
+Q2:
+a0 a3 
+name   arrival   end   ready   running   waiting
+bash-4.2$ 
